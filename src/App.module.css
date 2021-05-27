@@ -1,0 +1,18 @@
+.wrapper{
+  display: grid;
+  grid-template-areas:
+  "h h h"
+  "n c c";
+  grid-template-rows: 60px 1fr;
+  grid-template-columns: 2fr 10fr;
+  background-color: white;
+  /* grid-gap: 0.625rem; */
+  grid-column-gap: 1rem;
+  grid-row-gap:1rem;
+
+
+}
+.content{
+  grid-area: c;
+  background-color: #EDEEF0;
+}

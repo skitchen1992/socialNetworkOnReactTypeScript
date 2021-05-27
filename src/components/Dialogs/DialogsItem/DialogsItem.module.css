@@ -1,0 +1,14 @@
+
+.dialogs{
+    display: flex;
+    margin: 2rem;
+}
+.dialog{
+    margin: .8rem;
+}
+
+.messages{
+    padding-left: 5rem;
+    margin: .8rem;
+}
+

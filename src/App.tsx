@@ -1,26 +1,38 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './App.module.css';
+import Header from "./components/Header/Header";
+import Nav from "./components/Nav/Nav";
+import './App.module.css';
+import Dialogs from "./components/Dialogs/Dialogs";
+import Profile from "./components/Profile/Profile";
+import {BrowserRouter} from "react-router-dom";
+import {Route} from "react-router";
+import classes from "./App.module.css";
+import {StateType} from "./redux/state";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+interface AppPropsType {
+    state: StateType
 }
 
+function App(props: AppPropsType) {
+    return (
+        <BrowserRouter>
+            <div className={classes.wrapper}>
+                <Header/>
+                <Nav/>
+                <div className={classes.content}>
+                    <Route path="/dialogs" render={() => <Dialogs dialogs={props.state.messagesPage.dialogs}
+                                                                  messages={props.state.messagesPage.messages}/>}/>
+                    <Route path="/profile" render={() => <Profile posts={props.state.profilePage.posts}/>}/>
+                    <Route path="/music" render={() => <Profile posts={props.state.profilePage.posts}/>}/>
+                    <Route path="/settings" render={() => <Profile posts={props.state.profilePage.posts}/>}/>
+
+                </div>
+            </div>
+        </BrowserRouter>
+    );
+}
+
+
 export default App;
+

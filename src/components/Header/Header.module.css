@@ -1,0 +1,12 @@
+
+  header{
+    grid-area: h;
+    background-color: #FFFFFF;
+
+  }
+
+  .img{
+    width: 3rem;
+    height: 3rem;
+    margin-top: 1rem;
+  }
