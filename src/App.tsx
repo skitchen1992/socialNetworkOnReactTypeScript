@@ -8,10 +8,12 @@ import Profile from "./components/Profile/Profile";
 import {BrowserRouter} from "react-router-dom";
 import {Route} from "react-router";
 import classes from "./App.module.css";
-import {StateType} from "./redux/state";
+import {addPost, StateType} from "./redux/state";
 
 interface AppPropsType {
-    state: StateType
+    state: StateType,
+    addPost: any,
+    updateNewPostText:any
 }
 
 function App(props: AppPropsType) {
@@ -23,10 +25,10 @@ function App(props: AppPropsType) {
                 <div className={classes.content}>
                     <Route path="/dialogs" render={() => <Dialogs dialogs={props.state.messagesPage.dialogs}
                                                                   messages={props.state.messagesPage.messages}/>}/>
-                    <Route path="/profile" render={() => <Profile posts={props.state.profilePage.posts}/>}/>
-                    <Route path="/music" render={() => <Profile posts={props.state.profilePage.posts}/>}/>
-                    <Route path="/settings" render={() => <Profile posts={props.state.profilePage.posts}/>}/>
-
+                    <Route path="/profile"
+                           render={() => <Profile posts={props.state.profilePage.posts} addPost={props.addPost}
+                                                  newPostText={props.state.profilePage.newPostText}
+                                                  updateNewPostText={props.updateNewPostText}/>}/>
                 </div>
             </div>
         </BrowserRouter>

@@ -1,3 +1,5 @@
+
+
 export type DialogsType = {
     id: number,
     name: string,
@@ -14,6 +16,7 @@ export type PostsType = {
 }
 export type ProfilePageType = {
     posts: Array<PostsType>,
+    newPostText: string
 
 }
 export type MessagesPageType = {
@@ -25,6 +28,9 @@ export type StateType = {
     messagesPage: MessagesPageType
 }
 
+let rerenderEntireTree=()=>{
+}
+
 let state: StateType = {
     profilePage: {
         posts: [
@@ -32,6 +38,7 @@ let state: StateType = {
             {id: 2, message: "My first post", likesCount: 12},
             {id: 3, message: "Yes", likesCount: 14},
         ],
+        newPostText: 'Введите текст',
     },
     messagesPage: {
         messages: [
@@ -47,6 +54,19 @@ let state: StateType = {
             {id: 4, name: "Masha"},
         ],
     }
+}
+export let addPost = () => {
+    let newPost: PostsType = {id: 1, message: state.profilePage.newPostText, likesCount: 13}
+    state.profilePage.posts.push(newPost)
+    state.profilePage.newPostText=''
+    rerenderEntireTree()
+}
+export let updateNewPostText = (newText: string) => {
+    state.profilePage.newPostText = newText
+    rerenderEntireTree()
+}
+export const subscribe=(observer:any)=>{
+    rerenderEntireTree=observer
 }
 
 export default state
