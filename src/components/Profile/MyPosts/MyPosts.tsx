@@ -6,9 +6,9 @@ import React from "react";
 
 type MyPostsType = {
     posts: Array<PostsType>,
-    addPost: any,
+    addPost: ()=> void,
     newPostText: string,
-    updateNewPostText: any
+    updateNewPostText: (text: string) => void,
 }
 
 

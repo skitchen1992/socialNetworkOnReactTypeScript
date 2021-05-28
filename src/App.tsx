@@ -5,20 +5,18 @@ import Nav from "./components/Nav/Nav";
 import './App.module.css';
 import Dialogs from "./components/Dialogs/Dialogs";
 import Profile from "./components/Profile/Profile";
-import {BrowserRouter} from "react-router-dom";
 import {Route} from "react-router";
 import classes from "./App.module.css";
-import {addPost, StateType} from "./redux/state";
+import {StateType} from "./redux/state";
 
-interface AppPropsType {
-    state: StateType,
-    addPost: any,
-    updateNewPostText:any
+type AppPropsType = {
+    state: StateType
+    addPost: ()=> void,
+    updateNewPostText:(text: string) => void,
 }
 
 function App(props: AppPropsType) {
     return (
-        <BrowserRouter>
             <div className={classes.wrapper}>
                 <Header/>
                 <Nav/>
@@ -31,7 +29,7 @@ function App(props: AppPropsType) {
                                                   updateNewPostText={props.updateNewPostText}/>}/>
                 </div>
             </div>
-        </BrowserRouter>
+
     );
 }
 

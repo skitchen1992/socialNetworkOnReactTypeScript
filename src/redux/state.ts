@@ -1,10 +1,8 @@
 
-
 export type DialogsType = {
     id: number,
     name: string,
 }
-
 export type MessagesType = {
     id: number,
     message: string,
@@ -27,11 +25,17 @@ export type StateType = {
     profilePage: ProfilePageType,
     messagesPage: MessagesPageType
 }
-
-let rerenderEntireTree=()=>{
+export type StoreType={
+    _state:StateType,
+    getState:()=> StateType,
+    _callSubscriber:any,
+    addPost: ()=> void,
+    updateNewPostText:(text: string) => void,
+    subscribe: (observer: any)=> void
 }
 
-let state: StateType = {
+let store:StoreType={
+    _state:{
     profilePage: {
         posts: [
             {id: 1, message: "Hi", likesCount: 13},
@@ -54,19 +58,27 @@ let state: StateType = {
             {id: 4, name: "Masha"},
         ],
     }
-}
-export let addPost = () => {
-    let newPost: PostsType = {id: 1, message: state.profilePage.newPostText, likesCount: 13}
-    state.profilePage.posts.push(newPost)
-    state.profilePage.newPostText=''
-    rerenderEntireTree()
-}
-export let updateNewPostText = (newText: string) => {
-    state.profilePage.newPostText = newText
-    rerenderEntireTree()
-}
-export const subscribe=(observer:any)=>{
-    rerenderEntireTree=observer
+},
+    getState(){
+        return this._state
+    },
+    _callSubscriber(){
+    },
+    addPost(){
+        let newPost: PostsType = {id: 1, message: this._state.profilePage.newPostText, likesCount: 13}
+        this._state.profilePage.posts.push(newPost)
+        this._state.profilePage.newPostText=''
+        this._callSubscriber()
+    },
+    updateNewPostText(newText: string){
+        this._state.profilePage.newPostText = newText
+        this._callSubscriber()
+    },
+    subscribe(observer:any){
+        this._callSubscriber=observer
+    },
+
 }
 
-export default state
+
+export default store

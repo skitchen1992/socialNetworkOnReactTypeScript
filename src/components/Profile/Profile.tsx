@@ -5,9 +5,9 @@ import {PostsType} from "../../redux/state";
 
 type ProfileType={
     posts: Array<PostsType>,
-    addPost:any,
+    addPost: ()=> void,
     newPostText:string,
-    updateNewPostText:any
+    updateNewPostText: (text: string) => void,
 }
 function Profile(props:ProfileType) {
     return (
