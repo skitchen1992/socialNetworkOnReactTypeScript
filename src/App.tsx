@@ -11,8 +11,7 @@ import {StateType} from "./redux/state";
 
 type AppPropsType = {
     state: StateType
-    addPost: ()=> void,
-    updateNewPostText:(text: string) => void,
+    dispatch:(action:any)=> void,
 }
 
 function App(props: AppPropsType) {
@@ -24,9 +23,9 @@ function App(props: AppPropsType) {
                     <Route path="/dialogs" render={() => <Dialogs dialogs={props.state.messagesPage.dialogs}
                                                                   messages={props.state.messagesPage.messages}/>}/>
                     <Route path="/profile"
-                           render={() => <Profile posts={props.state.profilePage.posts} addPost={props.addPost}
+                           render={() => <Profile posts={props.state.profilePage.posts} dispatch={props.dispatch}
                                                   newPostText={props.state.profilePage.newPostText}
-                                                  updateNewPostText={props.updateNewPostText}/>}/>
+                                                  />}/>
                 </div>
             </div>
 

@@ -6,9 +6,8 @@ import React from "react";
 
 type MyPostsType = {
     posts: Array<PostsType>,
-    addPost: ()=> void,
     newPostText: string,
-    updateNewPostText: (text: string) => void,
+    dispatch: (action: any) => void,
 }
 
 
@@ -19,11 +18,11 @@ function MyPosts(props: MyPostsType) {
     />)
     let newPostElement: any = React.createRef();
     let addPost = () => {
-        props.addPost()
+        props.dispatch({type: "ADD-POST"})
     }
     let onPostChange = () => {
         let text: string = newPostElement.current.value
-        props.updateNewPostText(text)
+        props.dispatch({type: "UPDATE-NEW-POST-TEXT", newText: text})
     }
 
     return (
