@@ -27,9 +27,9 @@ export type StateType = {
 export type StoreType = {
     _state: StateType,
     getState: () => StateType,
-    _callSubscriber: any,
-    subscribe: (observer: any) => void
-    dispatch: (action: any) => void,
+    _callSubscriber: () => void,
+    subscribe: (observer:() => void ) => void
+    dispatch: (action: ActionsType) => void,
 }
 
 let store: StoreType = {
@@ -62,7 +62,7 @@ let store: StoreType = {
     getState() {
         return this._state
     },
-    subscribe(observer: any) {
+    subscribe(observer: () => void ) {
         this._callSubscriber = observer
     },
     dispatch(action) {
@@ -71,12 +71,18 @@ let store: StoreType = {
             this._state.profilePage.posts.push(newPost)
             this._state.profilePage.newPostText = ''
             this._callSubscriber()
-        } else if (action.type === UPDATE_NEW_POST_TEXT) {
+        }else if (action.type === UPDATE_NEW_POST_TEXT) {
             this._state.profilePage.newPostText = action.newText
             this._callSubscriber()
         }
     }
 }
+
+
+
+export type ActionsType = AddPostActionType & ReturnType<typeof updateNewPostTextActionCreator>
+
+export  type AddPostActionType = ReturnType<typeof addPostActionCreator>
 
 const ADD_POST:string = "ADD-POST";
 const UPDATE_NEW_POST_TEXT:string = "UPDATE-NEW-POST-TEXT";
