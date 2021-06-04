@@ -20,8 +20,7 @@ function App(props: AppPropsType) {
                 <Header/>
                 <Nav/>
                 <div className={classes.content}>
-                    <Route path="/dialogs" render={() => <Dialogs dialogs={props.state.messagesPage.dialogs}
-                                                                  messages={props.state.messagesPage.messages}/>}/>
+                    <Route path="/dialogs" render={() => <Dialogs messagesPage={props.state.messagesPage} dispatch={props.dispatch}/>}/>
                     <Route path="/profile"
                            render={() => <Profile posts={props.state.profilePage.posts} dispatch={props.dispatch}
                                                   newPostText={props.state.profilePage.newPostText}

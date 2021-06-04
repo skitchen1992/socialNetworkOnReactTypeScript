@@ -1,33 +1,46 @@
 import classes from './Dialogs.module.css';
 import {DialogItem} from "./DialogsItem/DialogsItem";
 import {Message} from "./Massage/Message";
-import {DialogsType, MessagesType,} from "../../redux/state";
+import {addMessageActionCreator, updateMessages,} from "../../redux/dialogs-reducer";
+import React from "react";
+import {MessagesPageType} from "../../redux/state";
 
 
 type DialogsPropsType = {
-    dialogs: Array<DialogsType>,
-    messages:Array<MessagesType>
+    messagesPage:MessagesPageType,
+    dispatch:(action:any)=> void,
 }
 
 function Dialogs(props:DialogsPropsType){
-
-    let dialogsElement = props.dialogs.map(el=>{
+    let dialogsElement = props.messagesPage.dialogs.map(el=>{
         return <DialogItem name={el.name} id={el.id}/>
     })
-
-    let messagesElement = props.messages.map(el=>{
+    let messagesElement = props.messagesPage.messages.map(el=>{
         return <Message message={el.message} id={el.id}/>
     })
-    return(
+    let addMessage = () => {
+        props.dispatch(addMessageActionCreator())
+    }
+    let onMessageChange = (e:any) => {
+        let text: string = e.target.value
+        let action = updateMessages(text)
+        props.dispatch(action)
+    }
 
-        <div className={classes.dialogs}>
-            <div className={classes.dialogItems}>
-                {dialogsElement}
+    return(
+        <div>
+            <div className={classes.dialogs}>
+                <div className={classes.dialogItems}>
+                    {dialogsElement}
+                </div>
+                <div className={classes.messages}>
+                    {messagesElement}
+                </div>
             </div>
-            <div className={classes.messages}>
-                {messagesElement}
-            </div>
+            <textarea onChange={onMessageChange} value={props.messagesPage.newMessagesText}/><br/>
+            <button onClick={addMessage} className={classes.button}>Send</button>
         </div>
+
 
 
     )

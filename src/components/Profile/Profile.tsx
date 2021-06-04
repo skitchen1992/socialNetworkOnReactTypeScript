@@ -1,12 +1,12 @@
 import './Profile.css';
 import MyPosts from './MyPosts/MyPosts';
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import {PostsType} from "../../redux/state";
+import {ActionsType, PostsType} from "../../redux/state";
 
 type ProfileType={
     posts: Array<PostsType>,
     newPostText:string,
-    dispatch:(action:any)=> void,
+    dispatch:(action:ActionsType)=> void,
 
 }
 function Profile(props:ProfileType) {
