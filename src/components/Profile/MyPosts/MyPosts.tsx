@@ -2,13 +2,13 @@ import classes from './MyPosts.module.css';
 import Post from './Post/Post';
 import {addPostActionCreator,  updateNewPostTextActionCreator} from "../../../redux/profile-reducer";
 import React from "react";
-import {PostsType} from "../../../redux/state";
+import {ActionsType, PostsType} from "../../../redux/store";
 
 
 type MyPostsType = {
     posts: Array<PostsType>,
     newPostText: string,
-    dispatch: (action: any) => void,
+    dispatch: (action: any) => void,//было (action: ActionsType) => void
 }
 
 

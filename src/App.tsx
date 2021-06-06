@@ -7,11 +7,11 @@ import Dialogs from "./components/Dialogs/Dialogs";
 import Profile from "./components/Profile/Profile";
 import {Route} from "react-router";
 import classes from "./App.module.css";
-import {StateType} from "./redux/state";
+import {ActionsType, StateType} from "./redux/store";
 
 type AppPropsType = {
     state: StateType
-    dispatch:(action:any)=> void,
+    dispatch:(action: any) => void,//было (action: ActionsType) => void
 }
 
 function App(props: AppPropsType) {

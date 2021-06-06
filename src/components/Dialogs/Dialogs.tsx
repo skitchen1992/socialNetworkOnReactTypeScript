@@ -3,12 +3,12 @@ import {DialogItem} from "./DialogsItem/DialogsItem";
 import {Message} from "./Massage/Message";
 import {addMessageActionCreator, updateMessages,} from "../../redux/dialogs-reducer";
 import React from "react";
-import {MessagesPageType} from "../../redux/state";
+import {MessagesPageType} from "../../redux/store";
 
 
 type DialogsPropsType = {
     messagesPage:MessagesPageType,
-    dispatch:(action:any)=> void,
+    dispatch:(action:any)=> void,//было (action: ActionsType) => void
 }
 
 function Dialogs(props:DialogsPropsType){

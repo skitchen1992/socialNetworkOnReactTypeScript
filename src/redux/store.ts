@@ -1,5 +1,5 @@
-import profileReducer, {addPostActionCreator, updateNewPostTextActionCreator} from "./profile-reducer";
-import dialogsReducer from "./dialogs-reducer";
+import profileReducer, {CommonProfileReducerType} from "./profile-reducer";
+import dialogsReducer, {CommonDialogsReducerType} from "./dialogs-reducer";
 
 export type DialogsType = {
     id: number,
@@ -33,10 +33,10 @@ export type StoreType = {
     getState: () => StateType,
     _callSubscriber: () => void,
     subscribe: (observer: () => void) => void
-    dispatch: (action: ActionsType) => void,
+    dispatch: (action: any) => void, //было (action: ActionsType) => void
 }
-export type ActionsType = AddPostActionType & ReturnType<typeof updateNewPostTextActionCreator>
-export  type AddPostActionType = ReturnType<typeof addPostActionCreator>
+export type ActionsType = CommonProfileReducerType & CommonDialogsReducerType
+
 
 let store: StoreType = {
     _state: {
@@ -78,13 +78,6 @@ let store: StoreType = {
         this._callSubscriber()
     }
 }
-
-
-
-
-
-
-
 
 
 
