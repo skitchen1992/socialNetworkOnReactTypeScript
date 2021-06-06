@@ -4,14 +4,15 @@ import {Message} from "./Massage/Message";
 import {addMessageActionCreator, updateMessages,} from "../../redux/dialogs-reducer";
 import React from "react";
 import {MessagesPageType} from "../../redux/store";
+import {useDispatch} from "react-redux";
 
 
 type DialogsPropsType = {
     messagesPage:MessagesPageType,
-    dispatch:(action:any)=> void,//было (action: ActionsType) => void
 }
 
 function Dialogs(props:DialogsPropsType){
+    const dispatch = useDispatch();
     let dialogsElement = props.messagesPage.dialogs.map(el=>{
         return <DialogItem name={el.name} id={el.id}/>
     })
@@ -19,12 +20,12 @@ function Dialogs(props:DialogsPropsType){
         return <Message message={el.message} id={el.id}/>
     })
     let addMessage = () => {
-        props.dispatch(addMessageActionCreator())
+        dispatch(addMessageActionCreator())
     }
     let onMessageChange = (e:any) => {
         let text: string = e.target.value
         let action = updateMessages(text)
-        props.dispatch(action)
+        dispatch(action)
     }
 
     return(

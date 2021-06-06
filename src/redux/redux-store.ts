@@ -7,6 +7,7 @@ let reducers = combineReducers({
     messagesPage:dialogsReducer
 })
 
+
 let store = createStore(reducers)
 
 export default store

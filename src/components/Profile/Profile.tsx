@@ -1,19 +1,19 @@
 import './Profile.css';
 import MyPosts from './MyPosts/MyPosts';
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import {ActionsType, PostsType} from "../../redux/store";
+import {PostsType} from "../../redux/store";
 
 type ProfileType={
     posts: Array<PostsType>,
     newPostText:string,
-    dispatch:(action: any) => void//было (action: ActionsType) => void
+
 
 }
 function Profile(props:ProfileType) {
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts posts={props.posts} dispatch={props.dispatch} newPostText={props.newPostText} />
+            <MyPosts posts={props.posts}  newPostText={props.newPostText} />
         </div>
     )
 }

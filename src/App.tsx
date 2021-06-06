@@ -7,22 +7,24 @@ import Dialogs from "./components/Dialogs/Dialogs";
 import Profile from "./components/Profile/Profile";
 import {Route} from "react-router";
 import classes from "./App.module.css";
-import {ActionsType, StateType} from "./redux/store";
+import {StateType} from "./redux/store";
+
 
 type AppPropsType = {
     state: StateType
-    dispatch:(action: any) => void,//было (action: ActionsType) => void
 }
 
 function App(props: AppPropsType) {
+
+
     return (
             <div className={classes.wrapper}>
                 <Header/>
                 <Nav/>
                 <div className={classes.content}>
-                    <Route path="/dialogs" render={() => <Dialogs messagesPage={props.state.messagesPage} dispatch={props.dispatch}/>}/>
+                    <Route path="/dialogs" render={() => <Dialogs messagesPage={props.state.messagesPage} />}/>
                     <Route path="/profile"
-                           render={() => <Profile posts={props.state.profilePage.posts} dispatch={props.dispatch}
+                           render={() => <Profile posts={props.state.profilePage.posts}
                                                   newPostText={props.state.profilePage.newPostText}
                                                   />}/>
                 </div>
