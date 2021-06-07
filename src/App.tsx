@@ -3,11 +3,11 @@ import './App.module.css';
 import Header from "./components/Header/Header";
 import Nav from "./components/Nav/Nav";
 import './App.module.css';
-import Dialogs from "./components/Dialogs/Dialogs";
 import Profile from "./components/Profile/Profile";
 import {Route} from "react-router";
 import classes from "./App.module.css";
 import {StateType} from "./redux/store";
+import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
 
 type AppPropsType = {
@@ -22,7 +22,7 @@ function App(props: AppPropsType) {
                 <Header/>
                 <Nav/>
                 <div className={classes.content}>
-                    <Route path="/dialogs" render={() => <Dialogs messagesPage={props.state.messagesPage} />}/>
+                    <Route path="/dialogs" render={() => <DialogsContainer state={props.state} />}/>
                     <Route path="/profile" render={() => <Profile state={props.state}/>}/>
                 </div>
             </div>
