@@ -1,19 +1,17 @@
 import './Profile.css';
 import MyPosts from './MyPosts/MyPosts';
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import {PostsType} from "../../redux/store";
+import {PostsType, StateType} from "../../redux/store";
+import MyPostsContainer from "./MyPosts/MyPostsContainer";
 
 type ProfileType={
-    posts: Array<PostsType>,
-    newPostText:string,
-
-
+    state: StateType
 }
 function Profile(props:ProfileType) {
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts posts={props.posts}  newPostText={props.newPostText} />
+            <MyPostsContainer state={props.state}/>
         </div>
     )
 }

@@ -1,18 +1,15 @@
-
-
 export const addPostActionCreator = () => ({type: "ADD-POST"})
 export const updateNewPostTextActionCreator = (text: string) => ({type: "UPDATE-NEW-POST-TEXT", newText: text})
 
 
 export type AddPostActionType = {
-        type: "ADD-POST",
+    type: "ADD-POST",
 }
-export type UpdateNewPostTextActionCreator = {
-        type: "UPDATE-NEW-POST-TEXT",
-        newText: string
+export type UpdateNewPostTextActionCreatorType = {
+    type: "UPDATE-NEW-POST-TEXT",
+    newText: string
 }
-export type CommonProfileReducerType = AddPostActionType | UpdateNewPostTextActionCreator
-
+export type CommonProfileReducerType = AddPostActionType | UpdateNewPostTextActionCreatorType
 
 
 type PostsType = {
@@ -31,7 +28,7 @@ let initialState = {
 }
 export type InitialStateType = typeof initialState
 
-const profileReducer = (state= initialState, action: CommonProfileReducerType): InitialStateType  => {
+const profileReducer = (state = initialState, action: CommonProfileReducerType): InitialStateType => {
     switch (action.type) {
         case "ADD-POST":
             let newPost: PostsType = {id: 1, message: state.newPostText, likesCount: 13}
@@ -39,8 +36,10 @@ const profileReducer = (state= initialState, action: CommonProfileReducerType): 
             state.newPostText = ''
             return state;
         case "UPDATE-NEW-POST-TEXT":
-            state.newPostText = action.newText
-            return state;
+            debugger
+        return {...state, newPostText: action.newText}
+            // state.newPostText = action.newText
+            // return state;
         default :
             return state
     }

@@ -1,6 +1,3 @@
-// import {ActionsType, MessagesPageType, MessagesType, StateType} from "./store";
-
-
 export const addMessageActionCreator = () => ({type: "ADD-MESSAGE"}) as const
 export const updateMessages = (text: string) => ({type: "UPDATE-MESSAGE", newText: text}) as const
 
@@ -28,12 +25,12 @@ let initialState = {
         {id: 2, name: "Svetlana"},
         {id: 3, name: "Pasha"},
         {id: 4, name: "Masha"},
-    ]as Array<DialogsType>,
+    ] as Array<DialogsType>,
     newMessagesText: '',
 }
 export type InitialStateType = typeof initialState
 
-const dialogsReducer = (state=initialState, action: CommonDialogsReducerType ): InitialStateType => {
+const dialogsReducer = (state = initialState, action: CommonDialogsReducerType): InitialStateType => {
     switch (action.type) {
         case "ADD-MESSAGE":
             let newMessages: MessagesType = {id: 6, message: state.newMessagesText}

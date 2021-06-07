@@ -23,10 +23,7 @@ function App(props: AppPropsType) {
                 <Nav/>
                 <div className={classes.content}>
                     <Route path="/dialogs" render={() => <Dialogs messagesPage={props.state.messagesPage} />}/>
-                    <Route path="/profile"
-                           render={() => <Profile posts={props.state.profilePage.posts}
-                                                  newPostText={props.state.profilePage.newPostText}
-                                                  />}/>
+                    <Route path="/profile" render={() => <Profile state={props.state}/>}/>
                 </div>
             </div>
 
