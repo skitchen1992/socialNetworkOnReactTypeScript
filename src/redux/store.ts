@@ -1,16 +1,17 @@
 import profileReducer, {CommonProfileReducerType} from "./profile-reducer";
 import dialogsReducer, {CommonDialogsReducerType} from "./dialogs-reducer";
+import {v1} from "uuid";
 
 export type DialogsType = {
-    id: number,
+    id: string,
     name: string,
 }
 export type MessagesType = {
-    id: number,
+    id: string,
     message: string,
 }
 export type PostsType = {
-    id: number,
+    id: string,
     message: string,
     likesCount: number,
 }
@@ -42,24 +43,24 @@ let store: StoreType = {
     _state: {
         profilePage: {
             posts: [
-                {id: 1, message: "Hi", likesCount: 13},
-                {id: 2, message: "My first post", likesCount: 12},
-                {id: 3, message: "Yes", likesCount: 14},
+                {id: v1(), message: "Hi", likesCount: 13},
+                {id: v1(), message: "My first post", likesCount: 12},
+                {id: v1(), message: "Yes", likesCount: 14},
             ],
             newPostText: '',
         },
         messagesPage: {
             messages: [
-                {id: 1, message: "Hi"},
-                {id: 2, message: "By"},
-                {id: 3, message: "Why"},
-                {id: 4, message: "Tell me"},
+                {id: v1(), message: "Hi"},
+                {id: v1(), message: "By"},
+                {id: v1(), message: "Why"},
+                {id: v1(), message: "Tell me"},
             ],
             dialogs: [
-                {id: 1, name: "Dim"},
-                {id: 2, name: "Svetlana"},
-                {id: 3, name: "Pasha"},
-                {id: 4, name: "Masha"},
+                {id: v1(), name: "Dim"},
+                {id: v1(), name: "Svetlana"},
+                {id: v1(), name: "Pasha"},
+                {id: v1(), name: "Masha"},
             ],
             newMessagesText: '',
         }

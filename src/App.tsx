@@ -10,11 +10,11 @@ import {StateType} from "./redux/store";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
 
-type AppPropsType = {
-    state: StateType
-}
+// type AppPropsType = {
+//     state: StateType
+// }
 
-function App(props: AppPropsType) {
+function App() {
 
 
     return (
@@ -22,8 +22,8 @@ function App(props: AppPropsType) {
                 <Header/>
                 <Nav/>
                 <div className={classes.content}>
-                    <Route path="/dialogs" render={() => <DialogsContainer state={props.state} />}/>
-                    <Route path="/profile" render={() => <Profile state={props.state}/>}/>
+                    <Route path="/dialogs" render={() => <DialogsContainer />}/>
+                    <Route path="/profile" render={() => <Profile />}/>
                 </div>
             </div>
 

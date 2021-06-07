@@ -1,3 +1,5 @@
+import {v1} from "uuid";
+
 export const addMessageActionCreator = () => ({type: "ADD-MESSAGE"}) as const
 export const updateMessages = (text: string) => ({type: "UPDATE-MESSAGE", newText: text}) as const
 
@@ -6,25 +8,25 @@ export type UpDateMessageType = ReturnType<typeof updateMessages>
 export type CommonDialogsReducerType = AddMessageType | UpDateMessageType
 
 type MessagesType = {
-    id: number
+    id: string
     message: string
 }
 type DialogsType = {
-    id: number
+    id: string
     name: string
 }
 let initialState = {
     messages: [
-        {id: 1, message: "Hi"},
-        {id: 2, message: "By"},
-        {id: 3, message: "Why"},
-        {id: 4, message: "Tell me"},
+        {id: v1(), message: "Hi"},
+        {id: v1(), message: "By"},
+        {id: v1(), message: "Why"},
+        {id: v1(), message: "Tell me"},
     ] as Array<MessagesType>,
     dialogs: [
-        {id: 1, name: "Dim"},
-        {id: 2, name: "Svetlana"},
-        {id: 3, name: "Pasha"},
-        {id: 4, name: "Masha"},
+        {id: v1(), name: "Dim"},
+        {id: v1(), name: "Svetlana"},
+        {id: v1(), name: "Pasha"},
+        {id: v1(), name: "Masha"},
     ] as Array<DialogsType>,
     newMessagesText: '',
 }
@@ -33,7 +35,7 @@ export type InitialStateType = typeof initialState
 const dialogsReducer = (state = initialState, action: CommonDialogsReducerType): InitialStateType => {
     switch (action.type) {
         case "ADD-MESSAGE":
-            let newMessages: MessagesType = {id: 6, message: state.newMessagesText}
+            let newMessages: MessagesType = {id: v1(), message: state.newMessagesText}
             state.messages.push(newMessages)
             state.newMessagesText = ''
             return state;

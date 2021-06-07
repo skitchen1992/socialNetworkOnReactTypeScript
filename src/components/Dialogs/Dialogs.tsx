@@ -7,6 +7,7 @@ import {MessagesPageType, StateType} from "../../redux/store";
 import {useDispatch} from "react-redux";
 
 
+
 type DialogsPropsType = {
     state: StateType
     updateMessages:(text: string)=>void
