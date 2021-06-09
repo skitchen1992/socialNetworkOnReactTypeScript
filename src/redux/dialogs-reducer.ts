@@ -1,10 +1,10 @@
 import {v1} from "uuid";
 
-export const addMessageActionCreator = () => ({type: "ADD-MESSAGE"}) as const
-export const updateMessages = (text: string) => ({type: "UPDATE-MESSAGE", newText: text}) as const
+export const sendMessageCreator = () => ({type: "ADD-MESSAGE"}) as const
+export const updateNewMessageBodyCreator = (body: string) => ({type: "UPDATE-MESSAGE", newText: body}) as const
 
-export type AddMessageType = ReturnType<typeof addMessageActionCreator>
-export type UpDateMessageType = ReturnType<typeof updateMessages>
+export type AddMessageType = ReturnType<typeof sendMessageCreator>
+export type UpDateMessageType = ReturnType<typeof updateNewMessageBodyCreator>
 export type CommonDialogsReducerType = AddMessageType | UpDateMessageType
 
 type MessagesType = {
@@ -15,6 +15,7 @@ type DialogsType = {
     id: string
     name: string
 }
+
 let initialState = {
     messages: [
         {id: v1(), message: "Hi"},
@@ -28,20 +29,20 @@ let initialState = {
         {id: v1(), name: "Pasha"},
         {id: v1(), name: "Masha"},
     ] as Array<DialogsType>,
-    newMessagesText: '',
+    newMessagesBody: '',
 }
 export type InitialStateType = typeof initialState
 
 const dialogsReducer = (state = initialState, action: CommonDialogsReducerType): InitialStateType => {
     switch (action.type) {
         case "ADD-MESSAGE":
-            let newMessages: MessagesType = {id: v1(), message: state.newMessagesText}
-            state.messages.push(newMessages)
-            state.newMessagesText = ''
-            return state;
+            return {
+                ...state,
+                newMessagesBody: '',
+                messages: [...state.messages, {id: v1(), message: state.newMessagesBody}]
+            };
         case "UPDATE-MESSAGE":
-            state.newMessagesText = action.newText
-            return state;
+            return {...state, newMessagesBody: action.newText};
         default:
             return state
     }

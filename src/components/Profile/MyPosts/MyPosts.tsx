@@ -1,39 +1,32 @@
 import classes from './MyPosts.module.css';
 import Post from './Post/Post';
 import React from "react";
-import {PostsType} from "../../../redux/store";
+import {MyPostsPropsType} from "./MyPostsContainer";
 
 
-type MyPostsType = {
-    posts: Array<PostsType>,
-    newPostText: string,
-    updateNewPostTextActionCreator: (text: string) => void;
-    addPostActionCreator: () => void
-
-}
 
 
-function MyPosts(props: MyPostsType) {
-    let postsElements = props.posts.map((el) => <Post id={el.id}
-                                                      message={el.message}
-                                                      likesCount={el.likesCount}
-    />)
+
+function MyPosts(props: MyPostsPropsType) {
+    let postsElements = props.profilePage.posts.map((el) =>
+        <Post id={el.id} message={el.message} likesCount={el.likesCount} key={el.id}/>)
 
     let newPostElement: any = React.createRef();
     let onAddPost = () => {
-        props.addPostActionCreator()
+        props.addPost()
     }
     let onPostChange = () => {
         let text: string = newPostElement.current.value
-        props.updateNewPostTextActionCreator(text)
+        props.updateNewPostText(text)
 
     }
+    let newPostValue=props.profilePage.newPostText
 
     return (
         <div>
             <div className={classes.posts}>
                 <div className={classes.myPosts}>My posts</div>
-                <textarea onChange={onPostChange} ref={newPostElement} value={props.newPostText}/><br/>
+                <textarea onChange={onPostChange} ref={newPostElement} value={newPostValue}/><br/>
                 <button onClick={onAddPost} className={classes.button}>Add Post</button>
             </div>
             {postsElements}

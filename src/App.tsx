@@ -6,17 +6,12 @@ import './App.module.css';
 import Profile from "./components/Profile/Profile";
 import {Route} from "react-router";
 import classes from "./App.module.css";
-import {StateType} from "./redux/store";
-import DialogsContainer from "./components/Dialogs/DialogsContainer";
+import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 
 
-// type AppPropsType = {
-//     state: StateType
-// }
+
 
 function App() {
-
-
     return (
             <div className={classes.wrapper}>
                 <Header/>
