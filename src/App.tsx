@@ -7,6 +7,7 @@ import Profile from "./components/Profile/Profile";
 import {Route} from "react-router";
 import classes from "./App.module.css";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
+import UsersContainer from "./components/Users/UsersContainer";
 
 
 
@@ -19,6 +20,7 @@ function App() {
                 <div className={classes.content}>
                     <Route path="/dialogs" render={() => <DialogsContainer />}/>
                     <Route path="/profile" render={() => <Profile />}/>
+                    <Route path="/users" render={() => <UsersContainer/>}/>
                 </div>
             </div>
 

@@ -7,6 +7,7 @@ function Nav(){
                 <ul>
                     <li><NavLink to="/profile">Profile</NavLink></li>
                     <li><NavLink to="/dialogs">Messages</NavLink></li>
+                    <li><NavLink to="/users">Users</NavLink></li>
                     <li><NavLink to="/music">Music</NavLink></li>
                 </ul>
                 <ul>

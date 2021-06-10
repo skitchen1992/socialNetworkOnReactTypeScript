@@ -1,0 +1,50 @@
+
+.container {
+    display: flex;
+    height: 6rem;
+    justify-content: flex-start;
+    padding: 2rem 2rem;
+}
+.wrapper {
+    display: inline-block;
+    width: 20rem;
+    border-radius: 10px;
+    padding: 1rem 1rem;
+
+    border: 1px solid grey ;
+}
+.wrap{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    width: 5rem;
+}
+
+.top{
+    display: flex;
+    justify-content: space-between;
+}
+.footer{
+    padding-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+}
+.name {
+    color: #6A6791;
+}
+.status{
+    color: #A8BCA3;
+    padding-top: .7rem;
+
+}
+.button{
+    width: 4rem;
+}
+.city {
+    color: #2D4627;
+
+}
+.avatar{
+    width: 50px ;
+}

@@ -3,10 +3,10 @@ import classes  from './ProfileInfo.module.css';
 function ProfileInfo() {
     return (
         <div>
-            <div className={classes.img}></div>
+            <div className={classes.img1}></div>
             <div className={classes.userInfo}>
                 <div className={classes.logo}>
-                    <img src="https://i.pinimg.com/originals/9c/77/46/9c7746225873e02d83b9315501b8dd2f.jpg"
+                    <img className={classes.img} src="https://i.pinimg.com/originals/9c/77/46/9c7746225873e02d83b9315501b8dd2f.jpg"
                          alt=""></img>
                 </div>
 
