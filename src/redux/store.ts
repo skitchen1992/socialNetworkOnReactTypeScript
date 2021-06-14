@@ -1,5 +1,5 @@
 import profileReducer, {CommonProfileReducerType} from "./profile-reducer";
-import dialogsReducer, {CommonDialogsReducerType} from "./dialogs-reducer";
+/*import dialogsReducer, {CommonDialogsReducerType} from "./dialogs-reducer";
 import {v1} from "uuid";
 
 type DialogsType = {
@@ -78,6 +78,6 @@ let store: StoreType = {
         //this._state.messagesPage = dialogsReducer(this._state.messagesPage, action)
         this._callSubscriber()
     }
-}
+}*/
 
 

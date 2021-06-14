@@ -8,28 +8,27 @@ type MapStateToPropsType = {
     dialogsPage: InitialStateType
 }
 type MapDispatchToPropsType = {
-    updateNewMessagesBody:(body:string)=>void
-    sendMessage:()=>void
+    updateNewMessagesBody: (body: string) => void
+    sendMessage: () => void
 }
 
 export type DialogsPropsType = MapStateToPropsType & MapDispatchToPropsType
 
-let mapStateToProps = (state: AppStateType):MapStateToPropsType  => {
+let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
         dialogsPage: state.dialogsPage
     }
 }
-let mapDispatchToProps = (dispatch: Dispatch):MapDispatchToPropsType => {
+let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
     return {
-        updateNewMessagesBody:(body:string)=>{
+        updateNewMessagesBody: (body: string) => {
             dispatch(updateNewMessageBodyCreator(body))
         },
-        sendMessage:()=>{
+        sendMessage: () => {
             dispatch(sendMessageCreator())
         }
     }
 }
-
 
 
 export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)

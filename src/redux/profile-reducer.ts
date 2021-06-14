@@ -2,7 +2,7 @@ import {v1} from "uuid";
 
 export const addPostActionCreator = () => ({type: "ADD-POST"}) as const
 export const updateNewPostTextActionCreator = (text: string) => ({type: "UPDATE-NEW-POST-TEXT", newText: text}) as const
-
+export const setUserProfile = (profile: any) => ({type: "SET-USER-PROFILE", profile}) as const
 
 export type AddPostActionType = {
     type: "ADD-POST",
@@ -11,7 +11,11 @@ export type UpdateNewPostTextActionCreatorType = {
     type: "UPDATE-NEW-POST-TEXT",
     newText: string
 }
-export type CommonProfileReducerType = AddPostActionType | UpdateNewPostTextActionCreatorType
+export type SetUserProfile = {
+    type: "SET-USER-PROFILE",
+    profile: any
+}
+export type CommonProfileReducerType = AddPostActionType | UpdateNewPostTextActionCreatorType | SetUserProfile
 
 
 type PostsType = {
@@ -27,6 +31,7 @@ let initialState = {
         {id: v1(), message: "Yes", likesCount: 14},
     ] as Array<PostsType>,
     newPostText: '',
+    profile: null
 }
 export type InitialStateType = typeof initialState
 
@@ -40,6 +45,8 @@ const profileReducer = (state = initialState, action: CommonProfileReducerType):
             };
         case "UPDATE-NEW-POST-TEXT":
             return {...state, newPostText: action.newText}
+        case "SET-USER-PROFILE":
+            return {...state, profile: action.profile}
         default :
             return state
     }
