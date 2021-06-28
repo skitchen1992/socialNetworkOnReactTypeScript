@@ -3,11 +3,11 @@
   grid-template-areas:
   "h h h"
   "n c c";
-  grid-template-rows: 60px 1fr;
+  grid-template-rows: 6rem 1fr;
   grid-template-columns: 2fr 10fr;
   background-color: white;
   grid-column-gap: 1rem;
-  grid-row-gap:1rem;
+
   height: 60rem;
 }
 .content{

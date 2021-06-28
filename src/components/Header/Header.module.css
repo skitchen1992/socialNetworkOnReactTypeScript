@@ -1,12 +1,23 @@
 
-  header{
+.header {
     grid-area: h;
+
     background-color: #FFFFFF;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding:  2rem;
 
-  }
 
-  .img{
+}
+
+.img {
     width: 3rem;
     height: 3rem;
-    margin-top: 1rem;
-  }
+
+}
+
+.login {
+   padding-right: 8rem;
+
+}
