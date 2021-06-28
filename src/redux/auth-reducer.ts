@@ -1,4 +1,4 @@
-export const setUserData = (id:string, login:string, email:string) => ({
+export const setUserData = (id: string, login: string, email: string) => ({
     type: "SET_USER_DATA",
     data: {id, login, email}
 }) as const
@@ -12,14 +12,14 @@ export type InitialStateType = {
     "id": null | string
     "login": null | string
     "email": null | string
-    "isAuth":boolean
+    "isAuth": boolean
 }
 
-let initialState = {
+let initialState:InitialStateType = {
     "id": null,
     "login": null,
     "email": null,
-    "isAuth":false
+    "isAuth": false
 }
 
 
@@ -29,7 +29,7 @@ const authReducer = (state = initialState, action: CommonDialogsReducerType): In
             return {
                 ...state,
                 ...action.data,
-                isAuth:true
+                isAuth: true
             };
 
         default:
