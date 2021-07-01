@@ -1,10 +1,10 @@
 import {connect} from "react-redux";
 import {
-    followAC,
+    followAC, FollowingInProgress,
     InitialStateType,
     setCurrentPageAC,
     setTotalUsersCountAC,
-    setUsersAC, toggleIsFetchingAC,
+    setUsersAC, toggleIsFetchingAC, toggleIsFollowingProgressAC,
     unfollowAC
 } from "../../redux/users-reducer";
 import {AppStateType} from "../../redux/redux-store";
@@ -22,6 +22,7 @@ type MapStateToPropsType = {
     totalUsersCount: number
     currentPage: number
     isFetching: boolean
+    followingInProgress:Array<FollowingInProgress>
 
 }
 type MapDispatchToPropsType = {
@@ -31,6 +32,7 @@ type MapDispatchToPropsType = {
     setCurrentPage: (users: number) => void
     setTotalUsersCount: (totalCount: number) => void
     toggleIsFetching: (isFetching: boolean) => void
+    toggleIsFollowingProgress:(isFetching: boolean, userId:number) => void
 
 }
 export type UsersPropsType = MapStateToPropsType & MapDispatchToPropsType
@@ -78,6 +80,8 @@ class UsersContainer extends React.Component<UsersPropsType, GetTasksResponseTyp
                            users={this.props.users}
                            unfollow={this.props.unfollow}
                            follow={this.props.follow}
+                           toggleIsFollowingProgress={this.props.toggleIsFollowingProgress}
+                           followingInProgress={this.props.followingInProgress}
                     />;
                 </div>
             </div>
@@ -92,7 +96,8 @@ let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
         pageSize: state.usersPage.pageSize,
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching
+        isFetching: state.usersPage.isFetching,
+        followingInProgress:state.usersPage.followingInProgress
     }
 }
 let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
@@ -114,6 +119,9 @@ let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
         },
         toggleIsFetching: (isFetching: boolean) => {
             dispatch(toggleIsFetchingAC(isFetching))
+        },
+        toggleIsFollowingProgress: (isFetching: boolean, userId:number) => {
+            dispatch(toggleIsFollowingProgressAC(isFetching,userId))
         }
 
     }
