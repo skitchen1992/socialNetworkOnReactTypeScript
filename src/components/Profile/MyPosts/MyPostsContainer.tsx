@@ -3,11 +3,11 @@ import React from "react";
 import {Dispatch} from "redux";
 import {connect} from "react-redux";
 import MyPosts from "./MyPosts";
-import {InitialStateType} from "../../../redux/profile-reducer";
+import {ProfileStateType} from "../../../redux/profile-reducer";
 import {AppStateType} from "../../../redux/redux-store";
 
 type MapStateToPropsType = {
-    profilePage: InitialStateType
+    profilePage: ProfileStateType
 }
 type MapDispatchToPropsType = {
     updateNewPostText:(body:string)=>void

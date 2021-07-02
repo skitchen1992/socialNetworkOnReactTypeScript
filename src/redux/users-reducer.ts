@@ -1,5 +1,6 @@
 import {usersAPI} from "../api/api";
 import {Dispatch} from "redux";
+import axios from "axios";
 
 export const followSuccess = (userId: number) => ({type: "FOLLOW", userId}) as const
 export const unfollowSuccess = (userId: number) => ({type: "UNFOLLOW", userId}) as const
@@ -105,6 +106,7 @@ export const unfollow = (userId:number) =>{//Санка
             })
     }
 }
+
 
 
 let initialState = {

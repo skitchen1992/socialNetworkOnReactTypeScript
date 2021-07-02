@@ -4,6 +4,7 @@ import {Message} from "./Massage/Message";
 import React from "react";
 
 import {DialogsPropsType} from "./DialogsContainer";
+import {Redirect} from "react-router";
 
 function Dialogs(props: DialogsPropsType) {
     let state = props.dialogsPage
@@ -24,7 +25,9 @@ function Dialogs(props: DialogsPropsType) {
         let body: string = e.target.value
         props.updateNewMessagesBody(body)
     }
-
+    if (!props.isAuth){
+        return <Redirect to={"/login"}/>
+    }
     return (
         <div>
             <div className={classes.dialogs}>

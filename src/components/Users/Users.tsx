@@ -3,8 +3,7 @@ import userPhoto from "../../assets/images/2.png";
 import classes from "../Users/Users.module.css";
 import {FollowingInProgress, InitialStateType} from "../../redux/users-reducer";
 import {NavLink} from 'react-router-dom';
-import axios from "axios";
-import {usersAPI} from "../../api/api";
+
 
 type UsersTypes = {
     onPageChanged: (pageNumber: number) => void
@@ -14,10 +13,7 @@ type UsersTypes = {
     users: InitialStateType
     unfollow: (userID: number) => void
     follow: (userID: number) => void
-    //toggleIsFollowingProgress: (isFetching: boolean, userId: number) => void
     followingInProgress: Array<FollowingInProgress>
-
-
 }
 
 
@@ -67,8 +63,6 @@ const Users = (props: UsersTypes) => {
                     <span onClick={(e) => {
                         props.onPageChanged(p)
                     }}>{p}</span>)}
-
-                {/*//return <span className={this.props.currentPage === p && s.selectedPage}>{p}</span>*/}
             </div>
         </div>
 

@@ -1,13 +1,15 @@
 import classes  from './ProfileInfo.module.css';
-import user from '../../../assets/images/user.png'
 import Preloader from "../../common/Preloader/Preloader";
+import {ProfileType} from "../ProfileContainer";
 
-
-
-function ProfileInfo(props:any) {
-if(!props.profile){
-    return <Preloader/>
+type ProfileInfoType = {
+    profile: ProfileType | null
 }
+
+function ProfileInfo(props:ProfileInfoType) {
+    if(!props.profile){
+        return <Preloader/>
+    }
     return (
         <div>
             <div className={classes.img1}></div>

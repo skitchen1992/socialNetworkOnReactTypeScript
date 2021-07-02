@@ -1,25 +1,58 @@
 import './Profile.css';
 import React from "react";
 import Profile from "./Profile";
-import axios from "axios";
-import {setUserProfile} from "../../redux/profile-reducer";
+import {getUserProfile} from "../../redux/profile-reducer";
 import {connect} from "react-redux";
-import {withRouter} from "react-router";
+import {Redirect, RouteComponentProps, withRouter} from "react-router";
+import {AppStateType} from "../../redux/redux-store";
 
-
-class ProfileContainer extends React.Component<any, any> {
-    componentDidMount() {
-        let userId = this.props.match.params.userId
-        if(!userId){
-            userId = 2
-        }
-        axios.get(`https://social-network.samuraijs.com/api/1.0//profile/${userId}`)
-            .then(response => {
-                this.props.setUserProfile(response.data)
-            })
+export type ProfileType = {
+    "aboutMe": string,
+    "contacts": {
+        "facebook": string,
+        "website": null | string,
+        "vk": string,
+        "twitter": string,
+        "instagram": string,
+        "youtube": null | string,
+        "github": string,
+        "mainLink": null | string
+    },
+    "lookingForAJob": true,
+    "lookingForAJobDescription": string,
+    "fullName": string,
+    "userId": number,
+    "photos": {
+        "small": string,
+        "large": string
     }
 
+}
+interface MatchParams {
+    userId: string;
+}
+
+type ProfileContainerPropsType = RouteComponentProps<MatchParams> & {
+    profile: ProfileType | null
+    getUserProfile: (userId: number) => void
+    isAuth:boolean
+}
+
+class ProfileContainer extends React.Component<ProfileContainerPropsType> {
+    componentDidMount() {
+        let userId = +this.props.match.params.userId
+        if (!userId) {
+            userId = 2
+        }
+        this.props.getUserProfile(userId)
+    }
+
+
     render() {
+        if (!this.props.isAuth){
+            return <Redirect to={"/login"}/>
+        }
+
         return (
             <div>
                 <Profile{...this.props} profile={this.props.profile}/>
@@ -29,10 +62,13 @@ class ProfileContainer extends React.Component<any, any> {
 
 
 }
-let mapStateToProps = (state:any)=>({
-    profile: state.profilePage.profile
+
+let mapStateToProps = (state: AppStateType) => ({
+    profile: state.profilePage.profile,
+    isAuth: state.auth.isAuth
 
 })
-let WithUserDataContainerComponent = withRouter(ProfileContainer)
 
-export default connect(mapStateToProps,{setUserProfile}) (WithUserDataContainerComponent );
+
+
+export default connect(mapStateToProps, {getUserProfile})(withRouter(ProfileContainer));

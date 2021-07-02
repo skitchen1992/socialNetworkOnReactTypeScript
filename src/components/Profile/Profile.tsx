@@ -3,13 +3,18 @@ import './Profile.css';
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
 import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
+import {ProfileType} from "./ProfileContainer";
+import {Redirect} from "react-router";
+import React from "react";
 
-type ProfileType = {
+type ProfileTypeProps = {
+    profile: ProfileType | null
 
 }
 
 
-function Profile(props:any) {
+function Profile(props:ProfileTypeProps) {
+
     return (
         <div>
             <ProfileInfo profile={props.profile}/>

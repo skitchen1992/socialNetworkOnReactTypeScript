@@ -2,7 +2,7 @@ import axios from "axios";
 
 
 const instance = axios.create({
-    withCredentials: true,
+    withCredentials: true,//withCredentials=> отправляет на сервер куку для авторизации
     baseURL: "https://social-network.samuraijs.com/api/1.0/",
     headers: {
         "API-KEY": "c48f3115-8ef6-4eff-913e-2249d6f1fd23"
@@ -21,7 +21,17 @@ export const usersAPI = {
     unfollow(userId: number) {
         return instance.delete(`follow/${userId}`)
 
+    },
+    getProfile(userId: number) {
+       return  instance.get(`/profile/${userId}`)
+
     }
+}
+export const authAPI = {
+    me(){
+        return instance.get(`auth/me`)
+    }
+
 }
 
 
