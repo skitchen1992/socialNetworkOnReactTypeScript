@@ -5,7 +5,7 @@ import Nav from "./components/Nav/Nav";
 import './App.module.css';
 import {Route} from "react-router";
 import classes from "./App.module.css";
-import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
+import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
