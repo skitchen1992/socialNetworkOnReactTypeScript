@@ -2,9 +2,8 @@ import classes from './Dialogs.module.css';
 import {DialogItem} from "./DialogsItem/DialogsItem";
 import {Message} from "./Massage/Message";
 import React from "react";
-
 import {DialogsPropsType} from "./DialogsContainer";
-import {Redirect} from "react-router";
+
 
 function Dialogs(props: DialogsPropsType) {
     let state = props.dialogsPage
@@ -21,7 +20,7 @@ function Dialogs(props: DialogsPropsType) {
     let onSendMessageClick = () => {
         props.sendMessage()
     }
-    let onNewMessageChange = (e: any) => {
+    let onNewMessageChange = (e:any) => {
         let body: string = e.target.value
         props.updateNewMessagesBody(body)
     }

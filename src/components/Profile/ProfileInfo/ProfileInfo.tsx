@@ -1,13 +1,14 @@
-import classes  from './ProfileInfo.module.css';
+import classes from './ProfileInfo.module.css';
 import Preloader from "../../common/Preloader/Preloader";
 import {ProfileType} from "../ProfileContainer";
+import {ProfileStatus} from "./ProfileStatus";
 
 type ProfileInfoType = {
     profile: ProfileType | null
 }
 
-function ProfileInfo(props:ProfileInfoType) {
-    if(!props.profile){
+function ProfileInfo(props: ProfileInfoType) {
+    if (!props.profile) {
         return <Preloader/>
     }
     return (
@@ -20,10 +21,13 @@ function ProfileInfo(props:ProfileInfoType) {
 
                 <div className={classes.about}>
                     <div className={classes.name}>{props.profile.fullName}</div>
+                    <ProfileStatus status={'fdfgdfgdf'}/>
                     <p>Date of Birth:<span>2 january</span></p>
                     <p>City:<span>Moscow</span></p>
                     <p>Education:<span>BSU 11</span></p>
-                    <p>WEB Site:<span>{props.profile.contacts.website!=null?props.profile.contacts.website: " Сайта нет"}</span></p>
+                    <p>WEB
+                        Site:<span>{props.profile.contacts.website != null ? props.profile.contacts.website : " Сайта нет"}</span>
+                    </p>
                 </div>
             </div>
         </div>
