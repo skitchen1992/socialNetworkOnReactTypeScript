@@ -5,6 +5,8 @@ import {ProfileStatus} from "./ProfileStatus";
 
 type ProfileInfoType = {
     profile: ProfileType | null
+    status:string
+    updateUserStatus:(status:string)=>void
 }
 
 function ProfileInfo(props: ProfileInfoType) {
@@ -21,7 +23,7 @@ function ProfileInfo(props: ProfileInfoType) {
 
                 <div className={classes.about}>
                     <div className={classes.name}>{props.profile.fullName}</div>
-                    <ProfileStatus status={'fdfgdfgdf'}/>
+                    <ProfileStatus status={props.status} updateUserStatus={props.updateUserStatus}/>
                     <p>Date of Birth:<span>2 january</span></p>
                     <p>City:<span>Moscow</span></p>
                     <p>Education:<span>BSU 11</span></p>

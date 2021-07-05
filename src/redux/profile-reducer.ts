@@ -1,11 +1,12 @@
 import {v1} from "uuid";
-import {usersAPI} from "../api/api";
+import {profileAPI, usersAPI} from "../api/api";
 import {Dispatch} from "redux";
 import {ProfileType} from "../components/Profile/ProfileContainer";
 
 export const addPostActionCreator = () => ({type: "ADD-POST"}) as const
 export const updateNewPostTextActionCreator = (text: string) => ({type: "UPDATE-NEW-POST-TEXT", newText: text}) as const
-export const setUserProfile = (profile: any) => ({type: "SET-USER-PROFILE", profile}) as const
+export const setUserProfile = (profile: ProfileType | null) => ({type: "SET-USER-PROFILE", profile}) as const
+export const setUserStatus = (status:string) => ({type: "SET-USER-STATUS",status}) as const
 
 export type AddPostActionType = {
     type: "ADD-POST",
@@ -16,9 +17,13 @@ export type UpdateNewPostTextActionCreatorType = {
 }
 export type SetUserProfile = {
     type: "SET-USER-PROFILE",
-    profile: any
+    profile: ProfileType | null
 }
-export type CommonProfileReducerType = AddPostActionType | UpdateNewPostTextActionCreatorType | SetUserProfile
+export type SetUserStatus = {
+    type: "SET-USER-STATUS",
+    status: string
+}
+export type CommonProfileReducerType = AddPostActionType | UpdateNewPostTextActionCreatorType | SetUserProfile | SetUserStatus
 type PostsType = {
     id: string
     message: string
@@ -33,7 +38,31 @@ export const getUserProfile = (userId:number)=>{ //санка
             })
     }
 }
+export const getUserStatus = (userId:number)=>{ //санка
+    return (dispatch:Dispatch)=>{
+        profileAPI.getUserStatus(userId )
+            .then(response => {
+                dispatch(setUserStatus(response.data))
+            })
+    }
+}
+export const updateUserStatus = (status:string)=>{ //санка
+    return (dispatch:Dispatch)=>{
+        profileAPI.updateStatus(status )
+            .then(response => {
+                if(response.data.resultCode === 0){
+                    dispatch(setUserStatus(status))
+                }
 
+            })
+    }
+}
+export type ProfileStateType = {
+    posts: Array<PostsType>,
+    newPostText: string,
+    profile: null | ProfileType,
+    status: string
+}
 let initialState: ProfileStateType = {
     posts: [
         {id: v1(), message: "Hi", likesCount: 13},
@@ -41,14 +70,11 @@ let initialState: ProfileStateType = {
         {id: v1(), message: "Yes", likesCount: 14},
     ] as Array<PostsType>,
     newPostText: '',
-    profile: null
+    profile: null,
+    status:''
 }
 
-export type ProfileStateType = {
-    posts: Array<PostsType>,
-    newPostText: string,
-    profile: null | ProfileType
-}
+
 
 const profileReducer = (state = initialState, action: CommonProfileReducerType): ProfileStateType => {
     switch (action.type) {
@@ -62,6 +88,9 @@ const profileReducer = (state = initialState, action: CommonProfileReducerType):
             return {...state, newPostText: action.newText}
         case "SET-USER-PROFILE":
             return {...state, profile: action.profile}
+        case "SET-USER-STATUS":
+            return {...state,
+                status: action.status}
         default :
             return state
     }
