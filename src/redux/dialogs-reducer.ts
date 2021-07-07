@@ -1,11 +1,8 @@
 import {v1} from "uuid";
 
-export const sendMessageCreator = () => ({type: "ADD-MESSAGE"}) as const
-export const updateNewMessageBodyCreator = (body: string) => ({type: "UPDATE-MESSAGE", newText: body}) as const
-
+export const sendMessageCreator = (newMessageBody:string) => ({type: "ADD-MESSAGE",newMessageBody}) as const
 export type AddMessageType = ReturnType<typeof sendMessageCreator>
-export type UpDateMessageType = ReturnType<typeof updateNewMessageBodyCreator>
-export type CommonDialogsReducerType = AddMessageType | UpDateMessageType
+export type CommonDialogsReducerType = AddMessageType
 
 type MessagesType = {
     id: string
@@ -29,7 +26,7 @@ let initialState = {
         {id: v1(), name: "Pasha"},
         {id: v1(), name: "Masha"},
     ] as Array<DialogsType>,
-    newMessagesBody: '',
+
 }
 export type InitialStateType = typeof initialState
 
@@ -38,11 +35,8 @@ const dialogsReducer = (state = initialState, action: CommonDialogsReducerType):
         case "ADD-MESSAGE":
             return {
                 ...state,
-                newMessagesBody: '',
-                messages: [...state.messages, {id: v1(), message: state.newMessagesBody}]
+                messages: [...state.messages, {id: v1(), message: action.newMessageBody}]
             };
-        case "UPDATE-MESSAGE":
-            return {...state, newMessagesBody: action.newText};
         default:
             return state
     }

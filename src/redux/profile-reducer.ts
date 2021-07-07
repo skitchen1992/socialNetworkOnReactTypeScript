@@ -3,18 +3,15 @@ import {profileAPI, usersAPI} from "../api/api";
 import {Dispatch} from "redux";
 import {ProfileType} from "../components/Profile/ProfileContainer";
 
-export const addPostActionCreator = () => ({type: "ADD-POST"}) as const
-export const updateNewPostTextActionCreator = (text: string) => ({type: "UPDATE-NEW-POST-TEXT", newText: text}) as const
+export const addPostActionCreator = (newPostText:string) => ({type: "ADD-POST",newPostText}) as const
 export const setUserProfile = (profile: ProfileType | null) => ({type: "SET-USER-PROFILE", profile}) as const
 export const setUserStatus = (status:string) => ({type: "SET-USER-STATUS",status}) as const
 
 export type AddPostActionType = {
     type: "ADD-POST",
+    newPostText:string
 }
-export type UpdateNewPostTextActionCreatorType = {
-    type: "UPDATE-NEW-POST-TEXT",
-    newText: string
-}
+
 export type SetUserProfile = {
     type: "SET-USER-PROFILE",
     profile: ProfileType | null
@@ -23,7 +20,7 @@ export type SetUserStatus = {
     type: "SET-USER-STATUS",
     status: string
 }
-export type CommonProfileReducerType = AddPostActionType | UpdateNewPostTextActionCreatorType | SetUserProfile | SetUserStatus
+export type CommonProfileReducerType = AddPostActionType | SetUserProfile | SetUserStatus
 type PostsType = {
     id: string
     message: string
@@ -59,7 +56,6 @@ export const updateUserStatus = (status:string)=>{ //санка
 }
 export type ProfileStateType = {
     posts: Array<PostsType>,
-    newPostText: string,
     profile: null | ProfileType,
     status: string
 }
@@ -69,7 +65,6 @@ let initialState: ProfileStateType = {
         {id: v1(), message: "My first post", likesCount: 12},
         {id: v1(), message: "Yes", likesCount: 14},
     ] as Array<PostsType>,
-    newPostText: '',
     profile: null,
     status:''
 }
@@ -81,11 +76,8 @@ const profileReducer = (state = initialState, action: CommonProfileReducerType):
         case "ADD-POST":
             return {
                 ...state,
-                newPostText: '',
-                posts: [...state.posts, {id: v1(), message: state.newPostText, likesCount: 13}]
+                posts: [...state.posts, {id: v1(), message: action.newPostText, likesCount: 13}]
             };
-        case "UPDATE-NEW-POST-TEXT":
-            return {...state, newPostText: action.newText}
         case "SET-USER-PROFILE":
             return {...state, profile: action.profile}
         case "SET-USER-STATUS":

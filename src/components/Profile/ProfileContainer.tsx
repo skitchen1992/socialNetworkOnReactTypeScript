@@ -31,7 +31,6 @@ export type ProfileType = {
 
 }
 type mapStateToPropsType = {
-    //isAuth:boolean
     profile: ProfileType | null
     status:string
 }
@@ -46,8 +45,6 @@ type ProfileContainerPropsType = RouteComponentProps<MatchParams> & {
     updateUserStatus:(status:string)=>void
     isAuth: boolean
     status:string
-
-
 }
 
 class ProfileContainer extends React.Component<ProfileContainerPropsType> {
@@ -73,7 +70,6 @@ class ProfileContainer extends React.Component<ProfileContainerPropsType> {
 }
 let mapStateToProps = (state: AppStateType):mapStateToPropsType => ({
     profile: state.profilePage.profile,
-    //isAuth: state.auth.isAuth
     status:state.profilePage.status
 
 })

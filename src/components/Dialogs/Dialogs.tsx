@@ -3,6 +3,8 @@ import {DialogItem} from "./DialogsItem/DialogsItem";
 import {Message} from "./Massage/Message";
 import React from "react";
 import {DialogsPropsType} from "./DialogsContainer";
+import  {Field,InjectedFormProps} from "redux-form";
+import {reduxForm} from "redux-form";
 
 
 function Dialogs(props: DialogsPropsType) {
@@ -14,15 +16,8 @@ function Dialogs(props: DialogsPropsType) {
     let messagesElement = state.messages.map(m => {
         return <Message message={m.message} id={m.id} key={m.id}/>
     })
-    let NewMessageBody = state.newMessagesBody
-
-
-    let onSendMessageClick = () => {
-        props.sendMessage()
-    }
-    let onNewMessageChange = (e:any) => {
-        let body: string = e.target.value
-        props.updateNewMessagesBody(body)
+    const addNewMessage=(values:FormDataType)=>{
+        props.sendMessage(values.newMessageBody)
     }
     return (
         <div>
@@ -34,10 +29,26 @@ function Dialogs(props: DialogsPropsType) {
                     {messagesElement}
                 </div>
             </div>
-            <textarea onChange={onNewMessageChange} value={NewMessageBody}/><br/>
-            <button onClick={onSendMessageClick} className={classes.button}>Send</button>
+            <AddMessageFormRedux onSubmit={addNewMessage} />
         </div>
     )
 }
+type FormDataType = {
+    newMessageBody:string
+
+}
+export const AddMessageForm: React.FC<InjectedFormProps<FormDataType>> = (props)=>{
+     return  (
+         <>
+            <form onSubmit={props.handleSubmit}>
+                <Field component="textarea" name="newMessageBody" placeholder="Ввидите сообщение"/>
+                <div>
+                    <button className={classes.button}>Send</button>
+                </div>
+            </form>
+        </>
+    )
+}
+const AddMessageFormRedux = reduxForm<FormDataType>({form:"dialogAddMessageForm"})(AddMessageForm)
 
 export default Dialogs;

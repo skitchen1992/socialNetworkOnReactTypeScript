@@ -1,0 +1,21 @@
+.wrapper{
+    display: flex;
+    justify-content: center;
+    margin: 5rem auto;
+}
+.input{
+    width: 200px;
+    margin: 10px;
+}
+.button{
+    width: 100px;
+    margin-top: 5px;
+}
+.wrapCheckBox{
+    display: flex;
+}
+.wrap{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
