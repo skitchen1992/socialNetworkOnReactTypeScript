@@ -33,6 +33,8 @@ export type ProfileType = {
 type mapStateToPropsType = {
     profile: ProfileType | null
     status:string
+    authorizedUserId: string | null
+    isAuth:boolean
 }
 interface MatchParams {
     userId: string;
@@ -45,16 +47,17 @@ type ProfileContainerPropsType = RouteComponentProps<MatchParams> & {
     updateUserStatus:(status:string)=>void
     isAuth: boolean
     status:string
+    authorizedUserId: string |null
 }
 
 class ProfileContainer extends React.Component<ProfileContainerPropsType> {
     componentDidMount() {
-        let userId = +this.props.match.params.userId
+        let userId = this.props.match.params.userId
         if (!userId) {
-            userId = 2
+            userId = this.props.authorizedUserId!
         }
-        this.props.getUserProfile(userId)
-        this.props.getUserStatus(userId)
+        this.props.getUserProfile(+userId)
+        this.props.getUserStatus(+userId)
     }
 
 
@@ -70,7 +73,10 @@ class ProfileContainer extends React.Component<ProfileContainerPropsType> {
 }
 let mapStateToProps = (state: AppStateType):mapStateToPropsType => ({
     profile: state.profilePage.profile,
-    status:state.profilePage.status
+    status:state.profilePage.status,
+    authorizedUserId: state.auth.id,
+    isAuth:state.auth.isAuth
+
 
 })
 export default compose<React.ComponentType>(

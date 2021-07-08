@@ -2,7 +2,7 @@ import './Post.module.css';
 
 
 type PostType = {
-    id:string,
+    id:string ,
     message:string,
     likesCount:number,
 }

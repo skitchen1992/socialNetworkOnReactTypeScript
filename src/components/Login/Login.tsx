@@ -50,6 +50,7 @@ export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
                         <Field type={"checkbox"} name={'rememberMe'} component={'input'}/>
                         <div>Remember me</div>
                     </div>
+                    {props.error && <div className={s.error}>{props.error}</div>}
                     <button className={s.button}>Login</button>
                 </div>
             </div>

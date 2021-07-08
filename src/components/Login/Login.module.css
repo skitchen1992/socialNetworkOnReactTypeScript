@@ -9,7 +9,7 @@
 }
 .button{
     width: 100px;
-    margin-top: 5px;
+    margin-top: 40px;
 }
 .wrapCheckBox{
     display: flex;
@@ -18,4 +18,10 @@
     display: flex;
     align-items: center;
     flex-direction: column;
+    position: relative;
+}
+.error{
+    color:red;
+    position: absolute;
+    top:166px
 }
