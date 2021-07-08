@@ -1,22 +1,40 @@
 import React from 'react';
 import s from "../Login/Login.module.css"
 import {reduxForm, Field, InjectedFormProps} from "redux-form";
+import {Input} from "../common/FormsControls/FormsControls";
+import {required} from "../../utils/validators/validators";
+import {connect} from "react-redux";
+import {login} from "../../redux/auth-reducer";
+import {Redirect} from "react-router";
+import {AppStateType} from "../../redux/redux-store";
 
-const Login = () => {
-    const onSubmit = (formData:FormDataType)=>{
-        console.log(formData)
+type FormDataType = {
+    email: string
+    password: string
+    rememberMe: boolean
+
+}
+ type MapStateToPropsType = {
+     isAuth:boolean
+ }
+type MapDispatchToPropsType = {
+    login: (email: string, password: string, rememberMe: boolean) => void
+}
+export type UsersPropsType = MapStateToPropsType & MapDispatchToPropsType
+
+
+const Login = (props: UsersPropsType) => {
+    const onSubmit = (formData: FormDataType) => {
+        props.login(formData.email, formData.password, formData.rememberMe)
+    }
+    if(props.isAuth){
+        return <Redirect to={"/profile"}/>
     }
     return (
         <LoginReduxForm onSubmit={onSubmit}/>
     );
 };
 
-type FormDataType = {
-    login:string
-    password:string
-    rememberMe:boolean
-
-}
 
 export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
     return (
@@ -24,8 +42,10 @@ export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
             <div className={s.wrapper}>
                 <div className={s.wrap}>
                     <h3>Login</h3>
-                    <Field className={s.input} placeholder={"Login"} name={'login'} component={'input'}/>
-                    <Field className={s.input} placeholder={"Password"} name={'password'} component={'input'}/>
+                    <Field className={s.input} placeholder={"Email"} name={'email'} component={Input}
+                           validate={[required]}/>
+                    <Field className={s.input} placeholder={"Password"} name={'password'} type={"password"}
+                           component={Input} validate={[required]}/>
                     <div className={s.wrapCheckBox}>
                         <Field type={"checkbox"} name={'rememberMe'} component={'input'}/>
                         <div>Remember me</div>
@@ -40,4 +60,9 @@ const LoginReduxForm = reduxForm<FormDataType>({
     form: 'login'
 })(LoginForm)
 
-export default Login;
+const mapStateToProps = (state: AppStateType ):MapStateToPropsType=> ({
+    isAuth: state.auth.isAuth
+
+})
+
+export default connect(mapStateToProps, {login})(Login);
