@@ -5,7 +5,7 @@ import {AppStateType} from "./redux-store";
 import {FormAction, stopSubmit} from "redux-form";
 
 export type SetUserData = ReturnType<typeof setUserData>
-export type CommonDialogsReducerType = SetUserData
+export type CommonAuthReducerType = SetUserData
 export type InitialStateType = {
     "id": null | string
     "login": null | string
@@ -42,13 +42,14 @@ export const getAuthUserData = () =>{//санка
 
 
 export const login = (email:string, password:string, rememberMe:boolean)=>{//санка
-    return (dispatch: ThunkDispatch<AppStateType, unknown, CommonDialogsReducerType | FormAction>) =>{
+    return (dispatch: ThunkDispatch<AppStateType, unknown, CommonAuthReducerType | FormAction>) =>{
         authAPI.login(email, password, rememberMe)
             .then(response => {
                 if (response.data.resultCode === 0) {
                 dispatch(getAuthUserData())
                 }else{
-                   let message =  response.data.message.length > 0 ? response.data.message[0] : "Some error"
+
+                   let message =  response.data.messages.length > 0 ? response.data.messages[0] : "Some error"
                     dispatch(stopSubmit('login',{_error:message}))
                 }
             })
@@ -65,7 +66,7 @@ export const logout = () =>{//санка
     }
 }
 
-const authReducer = (state = initialState, action: CommonDialogsReducerType): InitialStateType => {
+const authReducer = (state = initialState, action: CommonAuthReducerType): InitialStateType => {
     switch (action.type) {
         case "SET_USER_DATA":
             return {
