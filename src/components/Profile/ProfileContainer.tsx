@@ -32,10 +32,11 @@ export type ProfileType = {
 }
 type mapStateToPropsType = {
     profile: ProfileType | null
-    status:string
+    status: string
     authorizedUserId: string | null
-    isAuth:boolean
+    isAuth: boolean
 }
+
 interface MatchParams {
     userId: string;
 }
@@ -43,11 +44,11 @@ interface MatchParams {
 type ProfileContainerPropsType = RouteComponentProps<MatchParams> & {
     profile: ProfileType | null
     getUserProfile: (userId: number) => void
-    getUserStatus:(userId: number) => void
-    updateUserStatus:(status:string)=>void
+    getUserStatus: (userId: number) => void
+    updateUserStatus: (status: string) => void
     isAuth: boolean
-    status:string
-    authorizedUserId: string |null
+    status: string
+    authorizedUserId: string | null
 }
 
 class ProfileContainer extends React.Component<ProfileContainerPropsType> {
@@ -55,6 +56,9 @@ class ProfileContainer extends React.Component<ProfileContainerPropsType> {
         let userId = this.props.match.params.userId
         if (!userId) {
             userId = this.props.authorizedUserId!
+            if(!userId){
+                this.props.history.push("/login")
+            }
         }
         this.props.getUserProfile(+userId)
         this.props.getUserStatus(+userId)
@@ -64,23 +68,25 @@ class ProfileContainer extends React.Component<ProfileContainerPropsType> {
     render() {
         return (
             <div>
-                <Profile{...this.props} profile={this.props.profile} status={this.props.status} updateUserStatus={this.props.updateUserStatus}/>
+                <Profile{...this.props} profile={this.props.profile} status={this.props.status}
+                        updateUserStatus={this.props.updateUserStatus}/>
             </div>
         )
     }
 
 
 }
-let mapStateToProps = (state: AppStateType):mapStateToPropsType => ({
+
+let mapStateToProps = (state: AppStateType): mapStateToPropsType => ({
     profile: state.profilePage.profile,
-    status:state.profilePage.status,
+    status: state.profilePage.status,
     authorizedUserId: state.auth.id,
-    isAuth:state.auth.isAuth
+    isAuth: state.auth.isAuth
 
 
 })
 export default compose<React.ComponentType>(
-    connect(mapStateToProps, {getUserProfile,getUserStatus,updateUserStatus}),
+    connect(mapStateToProps, {getUserProfile, getUserStatus, updateUserStatus}),
     withRouter,
     withAuthRedirect
 )(ProfileContainer)

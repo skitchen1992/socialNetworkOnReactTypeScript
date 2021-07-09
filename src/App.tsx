@@ -12,23 +12,32 @@ import LoginPage from "./components/Login/Login";
 import {connect} from "react-redux";
 import {getAuthUserData, logout} from "./redux/auth-reducer";
 import {compose} from "redux";
-import {getUserProfile, getUserStatus, updateUserStatus} from "./redux/profile-reducer";
-import withAuthRedirect from "./hoc/withAuthRedirect";
+import {initializeApp} from "./redux/app-reducer";
+import {AppStateType} from "./redux/redux-store";
+import Preloader from "./components/common/Preloader/Preloader";
+
 
 
 
 type MapDispatchToPropsType = {
-    getAuthUserData:()=>void
+    initializeApp:()=>void
+}
+type MapStateToPropsType = {
+    initialized: boolean
+
 }
 
-export type AppPropsType = MapDispatchToPropsType
+export type AppPropsType = MapDispatchToPropsType & MapStateToPropsType
 
 class App extends Component<AppPropsType> {
     componentDidMount() {
-        this.props.getAuthUserData()
+        this.props.initializeApp()
     }
 
     render() {
+        if(!this.props.initialized){
+            return <Preloader/>
+        }
         return (
             <div className={classes.wrapper}>
                 <HeaderContainer/>
@@ -43,9 +52,12 @@ class App extends Component<AppPropsType> {
         );
     }
 }
+const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
+    initialized: state.app.initialized
+})
 
 export default compose<React.ComponentType>(
     withRouter,
-    connect(null, {getAuthUserData})
+    connect(mapStateToProps, {initializeApp})
 )(App)
 
