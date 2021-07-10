@@ -20,16 +20,6 @@ import {
     getUsers
 } from "../../redux/users-selectors";
 
-
-// type MapStateToPropsType = {
-//     users: InitialStateType
-//     pageSize: number
-//     totalUsersCount: number
-//     currentPage: number
-//     isFetching: boolean
-//     followingInProgress: Array<FollowingInProgress>
-//
-// }
 type MapStateToPropsType = {
     users: InitialStateType,
     pageSize: number
@@ -88,16 +78,6 @@ class UsersContainer extends React.Component<UsersPropsType, GetTasksResponseTyp
     }
 }
 
-// let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
-//     return {
-//         users: state.usersPage,
-//         pageSize: state.usersPage.pageSize,
-//         totalUsersCount: state.usersPage.totalUsersCount,
-//         currentPage: state.usersPage.currentPage,
-//         isFetching: state.usersPage.isFetching,
-//         followingInProgress: state.usersPage.followingInProgress
-//     }
-// }
 let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
         users: getUsers(state),

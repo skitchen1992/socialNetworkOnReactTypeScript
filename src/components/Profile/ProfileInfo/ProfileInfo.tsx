@@ -2,6 +2,7 @@ import classes from './ProfileInfo.module.css';
 import Preloader from "../../common/Preloader/Preloader";
 import {ProfileType} from "../ProfileContainer";
 import {ProfileStatus} from "./ProfileStatus";
+import {ProfileStatusHooks} from "./ProfileStatusHooks";
 
 type ProfileInfoType = {
     profile: ProfileType | null
@@ -23,7 +24,8 @@ function ProfileInfo(props: ProfileInfoType) {
 
                 <div className={classes.about}>
                     <div className={classes.name}>{props.profile.fullName}</div>
-                    <ProfileStatus status={props.status} updateUserStatus={props.updateUserStatus}/>
+                    {/*<ProfileStatus status={props.status} updateUserStatus={props.updateUserStatus}/>*/}
+                    <ProfileStatusHooks status={props.status} updateUserStatus={props.updateUserStatus}/>
                     <p>Date of Birth:<span>2 january</span></p>
                     <p>City:<span>Moscow</span></p>
                     <p>Education:<span>BSU 11</span></p>
