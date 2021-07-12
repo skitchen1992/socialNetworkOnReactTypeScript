@@ -1,9 +1,20 @@
 
 .selectedPage {
     font-weight: bold;
+    padding: 2px;
+    margin: 2px ;
 
 }
 .currentPage{
     width: 100vh;
-    overflow: hidden;
+    display: flex;
+    justify-content: center;
+}
+.span{
+
+    padding: 2px;
+    margin: 2px ;
+}
+.button{
+    margin:0 2px ;
 }

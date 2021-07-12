@@ -6,7 +6,7 @@ import User from "./User";
 
 type UsersTypes = {
     onPageChanged: (pageNumber: number) => void
-    totalUsersCount: number
+    totalItemsCount: number
     pageSize: number
     currentPage: number
     users: InitialStateType
@@ -16,7 +16,7 @@ type UsersTypes = {
 
 
 const Users = (props: UsersTypes) => {
-    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
+    let pagesCount = Math.ceil(props.totalItemsCount / props.pageSize)
     let pages = []
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i)
@@ -28,7 +28,7 @@ const Users = (props: UsersTypes) => {
                       user={u}/>)}
 
             <Paginator onPageChanged={props.onPageChanged}
-                       totalUsersCount={props.totalUsersCount}
+                       totalItemsCount={props.totalItemsCount}
                        pageSize={props.pageSize}
                        currentPage={props.currentPage}/>
         </div>

@@ -96,7 +96,7 @@ export const followUnfollowFlow = (userId: number, isFollowed?: boolean) => asyn
 let initialState = {
     users: [] as Array<UsersType>,
     pageSize: 3,
-    totalUsersCount: 0,
+    totalItemsCount: 0,
     currentPage: 1,
     isFetching: false,
     followingInProgress: [] as Array<FollowingInProgress>
@@ -120,7 +120,7 @@ const usersReducer = (state = initialState, action: CommonUsersReducerType): Ini
         case "SET-CURRENT-PAGE":
             return {...state, currentPage: action.currentPage}
         case "SET-TOTAL-COUNT":
-            return {...state, totalUsersCount: action.count}
+            return {...state, totalItemsCount: action.count}
         case "TOGGLE-IS-FETCHING":
             return {...state, isFetching: action.isFetching}
         case "TOGGLE-IS-FOLLOWING":
