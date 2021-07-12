@@ -3,7 +3,7 @@ import {
     followSuccess, FollowingInProgress,
     InitialStateType,
     setCurrentPage,
-    unfollowSuccess, requestUsers, UsersType, followUnfollowFlow
+    unfollowSuccess, requestUsers, followUnfollowFlow
 } from "../../redux/users-reducer";
 import {AppStateType} from "../../redux/redux-store";
 import React from "react";
@@ -32,14 +32,9 @@ type MapStateToPropsType = {
 type MapDispatchToPropsType = {
     followSuccess: (userID: number) => void
     unfollowSuccess: (userID: number) => void
-
-    followUnfollowFlow:(userId: number, isFollowed?: boolean)=>void
-
+    followUnfollowFlow: (userId: number, isFollowed?: boolean) => void
     setCurrentPage: (users: number) => void
     requestUsers: (page: number, pageSize: number) => void
-    // unfollow: (userId: number) => void
-    // follow: (userId: number) => void
-
 }
 type UsersPropsType = MapStateToPropsType & MapDispatchToPropsType
 type GetTasksResponseType = {
@@ -50,11 +45,13 @@ type GetTasksResponseType = {
 
 class UsersContainer extends React.Component<UsersPropsType, GetTasksResponseType> {
     componentDidMount() {
-        this.props.requestUsers(this.props.currentPage, this.props.pageSize)
+        const {currentPage, pageSize} = this.props
+        this.props.requestUsers(currentPage, pageSize)
     }
 
     onPageChanged = (pageNumber: number) => {
-        this.props.requestUsers(pageNumber, this.props.pageSize)
+        const {pageSize} = this.props
+        this.props.requestUsers(pageNumber, pageSize)
     }
 
     render() {
@@ -71,8 +68,6 @@ class UsersContainer extends React.Component<UsersPropsType, GetTasksResponseTyp
                            pageSize={this.props.pageSize}
                            currentPage={this.props.currentPage}
                            users={this.props.users}
-                           // unfollow={this.props.unfollow}
-                           // follow={this.props.follow}
                            followUnfollowFlow={this.props.followUnfollowFlow}
                            followingInProgress={this.props.followingInProgress}
                     />;
@@ -98,11 +93,8 @@ export default compose<React.ComponentType>(
         followSuccess,
         unfollowSuccess,
         followUnfollowFlow,
-
         setCurrentPage,
         requestUsers,
-        // unfollow,
-        // follow
     })
 )(UsersContainer)
 

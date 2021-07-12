@@ -14,9 +14,9 @@ type FormDataType = {
     rememberMe: boolean
 
 }
- type MapStateToPropsType = {
-     isAuth:boolean
- }
+type MapStateToPropsType = {
+    isAuth: boolean
+}
 type MapDispatchToPropsType = {
     login: (email: string, password: string, rememberMe: boolean) => void
 }
@@ -27,7 +27,7 @@ const Login = (props: UsersPropsType) => {
     const onSubmit = (formData: FormDataType) => {
         props.login(formData.email, formData.password, formData.rememberMe)
     }
-    if(props.isAuth){
+    if (props.isAuth) {
         return <Redirect to={"/profile"}/>
     }
     return (
@@ -61,7 +61,7 @@ const LoginReduxForm = reduxForm<FormDataType>({
     form: 'login'
 })(LoginForm)
 
-const mapStateToProps = (state: AppStateType ):MapStateToPropsType=> ({
+const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
     isAuth: state.auth.isAuth
 
 })

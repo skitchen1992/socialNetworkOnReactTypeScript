@@ -1,0 +1,9 @@
+
+.selectedPage {
+    font-weight: bold;
+
+}
+.currentPage{
+    width: 100vh;
+    overflow: hidden;
+}
