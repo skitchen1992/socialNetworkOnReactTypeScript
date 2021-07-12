@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack://src/components/Dialogs/Dialogs.module.css"],"names":[],"mappings":"AACA,wBACI,YAAa,CACb,WACJ,CACA,uBACI,YACJ,CAEA,yBACI,iBAAkB,CAClB,YACJ","file":"4.efe8a148.chunk.css","sourcesContent":["\n.dialogs{\n    display: flex;\n    margin: 2rem;\n}\n.dialog{\n    margin: .8rem;\n}\n\n.messages{\n    padding-left: 5rem;\n    margin: .8rem;\n}\n\n"]}
