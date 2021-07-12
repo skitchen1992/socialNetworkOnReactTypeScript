@@ -11,8 +11,9 @@ type UsersTypes = {
     pageSize: number
     currentPage: number
     users: InitialStateType
-    unfollow: (userID: number) => void
-    follow: (userID: number) => void
+    // unfollow: (userId: number, isFollowed?: boolean) => void
+    // follow: (userID: number) => void
+    followUnfollowFlow:(userId: number, isFollowed?: boolean)=>void
     followingInProgress: Array<FollowingInProgress>
 }
 
@@ -35,13 +36,11 @@ const Users = (props: UsersTypes) => {
                                      src={u.photos.small != null ? u.photos.small : userPhoto} alt=""/>
                             </NavLink>
                         </div>
-                        {u.followed
-                            ? <button className={classes.button} disabled={props.followingInProgress
-                                .some(id => id === u.id)} onClick={() => {props.unfollow(u.id)
-                            }}>Unfollow</button>
-                            : <button className={classes.button} disabled={props.followingInProgress
-                                .some(id => id === u.id)} onClick={() => {props.follow(u.id)
-                            }}>Follow</button>}
+                        <button className={classes.button} disabled={props.followingInProgress
+                            .some(id => id === u.id)} onClick={() => {props.followUnfollowFlow(u.id, u.followed)
+                        }}>
+                            {u.followed ? 'Unfollow' : 'Follow'}
+                        </button>
                     </div>
 
                     <div className={classes.wrapper}>

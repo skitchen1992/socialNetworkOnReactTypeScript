@@ -3,7 +3,7 @@ import {
     followSuccess, FollowingInProgress,
     InitialStateType,
     setCurrentPage,
-    unfollowSuccess, follow, unfollow, requestUsers, UsersType
+    unfollowSuccess, requestUsers, UsersType, followUnfollowFlow
 } from "../../redux/users-reducer";
 import {AppStateType} from "../../redux/redux-store";
 import React from "react";
@@ -32,10 +32,13 @@ type MapStateToPropsType = {
 type MapDispatchToPropsType = {
     followSuccess: (userID: number) => void
     unfollowSuccess: (userID: number) => void
+
+    followUnfollowFlow:(userId: number, isFollowed?: boolean)=>void
+
     setCurrentPage: (users: number) => void
     requestUsers: (page: number, pageSize: number) => void
-    unfollow: (userId: number) => void
-    follow: (userId: number) => void
+    // unfollow: (userId: number) => void
+    // follow: (userId: number) => void
 
 }
 type UsersPropsType = MapStateToPropsType & MapDispatchToPropsType
@@ -68,8 +71,9 @@ class UsersContainer extends React.Component<UsersPropsType, GetTasksResponseTyp
                            pageSize={this.props.pageSize}
                            currentPage={this.props.currentPage}
                            users={this.props.users}
-                           unfollow={this.props.unfollow}
-                           follow={this.props.follow}
+                           // unfollow={this.props.unfollow}
+                           // follow={this.props.follow}
+                           followUnfollowFlow={this.props.followUnfollowFlow}
                            followingInProgress={this.props.followingInProgress}
                     />;
                 </div>
@@ -93,10 +97,12 @@ export default compose<React.ComponentType>(
     connect(mapStateToProps, {
         followSuccess,
         unfollowSuccess,
+        followUnfollowFlow,
+
         setCurrentPage,
         requestUsers,
-        unfollow,
-        follow
+        // unfollow,
+        // follow
     })
 )(UsersContainer)
 
