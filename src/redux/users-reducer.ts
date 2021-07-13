@@ -1,7 +1,5 @@
 import {usersAPI} from "../api/api";
 import {Dispatch} from "redux";
-import axios from "axios";
-import React from "react";
 import {updateObjectInArray} from "../utils/object-helpers";
 
 export const followSuccess = (userId: number) => ({type: "FOLLOW", userId}) as const

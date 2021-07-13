@@ -6,7 +6,7 @@ import {ProfileType} from "../components/Profile/ProfileContainer";
 export const addPostActionCreator = (newPostText: string) => ({type: "ADD-POST", newPostText}) as const
 export const setUserProfile = (profile: ProfileType | null) => ({type: "SET-USER-PROFILE", profile}) as const
 export const setUserStatus = (status: string) => ({type: "SET-USER-STATUS", status}) as const
-
+export const savePhotoSuccess = (photos: any) => ({type: "SAVE-PHOTO-SUCCESS", photos}) as const
 export type AddPostActionType = {
     type: "ADD-POST",
     newPostText: string
@@ -20,7 +20,12 @@ export type SetUserStatus = {
     type: "SET-USER-STATUS",
     status: string
 }
-export type CommonProfileReducerType = AddPostActionType | SetUserProfile | SetUserStatus
+export type SavePhotoSuccess = {
+    type: "SAVE-PHOTO-SUCCESS",
+    photos: any
+}
+
+export type CommonProfileReducerType = AddPostActionType | SetUserProfile | SetUserStatus | SavePhotoSuccess
 export type PostsType = {
     id: string
     message: string
@@ -42,6 +47,12 @@ export const updateUserStatus = (status: string)=> async (dispatch: Dispatch) =>
                 if (response.data.resultCode === 0) {
                     dispatch(setUserStatus(status))
                 }
+}
+export const savePhoto = (file: File )=> async (dispatch: Dispatch) => { //санка
+    const response = await profileAPI.savePhoto(file)
+    if (response?.data.resultCode === 0) {
+        dispatch(savePhotoSuccess(response.data.data.photos))
+    }
 }
 export type ProfileStateType = {
     posts: Array<PostsType>,
@@ -73,9 +84,13 @@ const profileReducer = (state = initialState, action: CommonProfileReducerType):
                 ...state,
                 status: action.status
             }
+        case "SAVE-PHOTO-SUCCESS":
+            return {
+                ...state,
+                profile: state.profile ? {...state.profile, photos: action.photos} : state.profile
+            }
         default :
             return state
     }
-
 }
 export default profileReducer

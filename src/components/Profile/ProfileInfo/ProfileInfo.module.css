@@ -1,20 +1,27 @@
 
-.img1{
+.img1 {
     background-color: rgb(98, 96, 192);
     width: 100%;
     height: 7rem;
-  }
-  .userInfo{
+}
+
+.userInfo {
     display: flex;
     margin: 2rem 0 0 0;
-  }
-  .img{
+}
+
+.img {
     width: 5rem;
     padding-left: 1rem;
 
-  }
-  .about{
+}
+
+.about {
     flex-direction: column;
     padding: 0 0 0 2rem;
-  }
+}
 
+.logo{
+    display: flex;
+    flex-direction: column;
+}
