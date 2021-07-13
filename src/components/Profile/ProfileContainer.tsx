@@ -28,7 +28,7 @@ export type ProfileType = {
     "lookingForAJobDescription": string,
     "fullName": string,
     "userId": number,
-    "photos": PhotoType | File
+    "photos": PhotoType
 
 }
 type mapStateToPropsType = {

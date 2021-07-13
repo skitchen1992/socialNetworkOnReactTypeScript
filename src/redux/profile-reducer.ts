@@ -6,7 +6,7 @@ import {ProfileType} from "../components/Profile/ProfileContainer";
 export const addPostActionCreator = (newPostText: string) => ({type: "ADD-POST", newPostText}) as const
 export const setUserProfile = (profile: ProfileType | null) => ({type: "SET-USER-PROFILE", profile}) as const
 export const setUserStatus = (status: string) => ({type: "SET-USER-STATUS", status}) as const
-export const savePhotoSuccess = (photos: File) => ({type: "SAVE-PHOTO-SUCCESS", photos}) as const
+export const savePhotoSuccess = (photos: SavePhotoSuccess) => ({type: "SAVE-PHOTO-SUCCESS", photos}) as const
 export type AddPostActionType = {
     type: "ADD-POST",
     newPostText: string
@@ -22,7 +22,7 @@ export type SetUserStatus = {
 }
 export type SavePhotoSuccess = {
     type: "SAVE-PHOTO-SUCCESS",
-    photos: File
+    photos: any
 }
 
 export type CommonProfileReducerType = AddPostActionType | SetUserProfile | SetUserStatus | SavePhotoSuccess
