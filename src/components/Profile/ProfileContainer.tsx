@@ -3,7 +3,7 @@ import React from "react";
 import Profile from "./Profile";
 import {getUserProfile, getUserStatus, savePhoto, updateUserStatus} from "../../redux/profile-reducer";
 import {connect} from "react-redux";
-import {Redirect, RouteComponentProps, withRouter} from "react-router";
+import {RouteComponentProps, withRouter} from "react-router";
 import {AppStateType} from "../../redux/redux-store";
 import withAuthRedirect from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
@@ -28,7 +28,7 @@ export type ProfileType = {
     "lookingForAJobDescription": string,
     "fullName": string,
     "userId": number,
-    "photos": PhotoType
+    "photos": PhotoType | File
 
 }
 type mapStateToPropsType = {
@@ -50,7 +50,7 @@ type ProfileContainerPropsType = RouteComponentProps<MatchParams> & {
     isAuth: boolean
     status: string
     authorizedUserId: string | null
-    savePhoto:(e:any)=>void
+    savePhoto:(file: File)=>void
 }
 
 class ProfileContainer extends React.Component<ProfileContainerPropsType> {

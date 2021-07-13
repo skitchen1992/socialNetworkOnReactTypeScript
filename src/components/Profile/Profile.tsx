@@ -12,7 +12,7 @@ type ProfileTypeProps = {
     status:string
     updateUserStatus:(status:string)=>void
     isOwner:boolean
-    savePhoto:(e:any)=>void
+    savePhoto:(file: File)=>void
 }
 
 
