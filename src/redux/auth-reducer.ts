@@ -5,19 +5,22 @@ import {AppStateType} from "./redux-store";
 import {FormAction, stopSubmit} from "redux-form";
 
 export type SetUserData = ReturnType<typeof setUserData>
-export type CommonAuthReducerType = SetUserData
+export type GetCaptchaUrlSuccess = ReturnType<typeof getCaptchaUrlSuccess>
+export type CommonAuthReducerType = SetUserData | GetCaptchaUrlSuccess
 export type InitialStateType = {
     "id": null | string
     "login": null | string
     "email": null | string
     "isAuth": boolean
+    "captchaUrl": null | string
 }
 
 const initialState: InitialStateType = {
     "id": null,
     "login": null,
     "email": null,
-    "isAuth": false
+    "isAuth": false,
+    "captchaUrl": null
 }
 
 
@@ -25,7 +28,10 @@ export const setUserData = (id: string | null, login: string | null, email: stri
     type: "SET_USER_DATA",
     payload: {id, login, email, isAuth}
 }) as const
-
+export const getCaptchaUrlSuccess = (captchaUrl: string) => ({
+    type: "GET_CAPTCHA_URL_SUCCESS",
+    payload: captchaUrl
+}) as const
 
 export const getAuthUserData = () => async (dispatch: Dispatch) => {//санка
     const response = await authAPI.me()
@@ -35,8 +41,6 @@ export const getAuthUserData = () => async (dispatch: Dispatch) => {//санка
         dispatch(setUserData(id, email, login, true))
     }
 }
-
-
 export const login = (email: string, password: string, rememberMe: boolean) =>
     async (dispatch: ThunkDispatch<AppStateType, unknown, CommonAuthReducerType | FormAction>) => {//санка
         const response = await authAPI.login(email, password, rememberMe)
@@ -44,6 +48,9 @@ export const login = (email: string, password: string, rememberMe: boolean) =>
         if (response.data.resultCode === 0) {
             dispatch(getAuthUserData())
         } else {
+            if (response.data.resultCode === 10) {
+                dispatch(getCaptchaUrl)
+            }
             let message = response.data.messages.length > 0 ? response.data.messages[0] : "Some error"
             dispatch(stopSubmit('login', {_error: message}))
         }
@@ -57,6 +64,11 @@ export const logout = () => async (dispatch: Dispatch) => {//санка
         dispatch(setUserData(null, null, null, false))
     }
 }
+export const getCaptchaUrl = () => async (dispatch: Dispatch) => {//санка
+    const response = await authAPI.logout()
+    const captchaUrl = response.data.url
+    dispatch(getCaptchaUrlSuccess(captchaUrl))
+}
 
 const authReducer = (state = initialState, action: CommonAuthReducerType): InitialStateType => {
     switch (action.type) {
@@ -65,7 +77,12 @@ const authReducer = (state = initialState, action: CommonAuthReducerType): Initi
                 ...state,
                 ...action.payload,
             };
-
+        case "GET_CAPTCHA_URL_SUCCESS":
+            debugger
+            return {
+                ...state,
+                captchaUrl:action.payload
+            };
         default:
             return state
     }

@@ -1,36 +1,13 @@
 import './Profile.css';
 import React from "react";
 import Profile from "./Profile";
-import {getUserProfile, getUserStatus, savePhoto, updateUserStatus} from "../../redux/profile-reducer";
+import {getUserProfile, getUserStatus, ProfileType, savePhoto, updateUserStatus} from "../../redux/profile-reducer";
 import {connect} from "react-redux";
 import {RouteComponentProps, withRouter} from "react-router";
 import {AppStateType} from "../../redux/redux-store";
 import withAuthRedirect from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
 
-type PhotoType = {
-    "small": string,
-    "large": string
-}
-export type ProfileType = {
-    "aboutMe"?: string,
-    "contacts": {
-        "facebook": string,
-        "website": null | string,
-        "vk": string,
-        "twitter": string,
-        "instagram": string,
-        "youtube": null | string,
-        "github": string,
-        "mainLink": null | string
-    },
-    "lookingForAJob": true,
-    "lookingForAJobDescription": string,
-    "fullName": string,
-    "userId": number,
-    "photos": PhotoType
-
-}
 type mapStateToPropsType = {
     profile: ProfileType | null
     status: string
@@ -69,7 +46,7 @@ class ProfileContainer extends React.Component<ProfileContainerPropsType> {
         this.refreshProfile()
     }
     componentDidUpdate(prevProps: Readonly<ProfileContainerPropsType>, prevState: Readonly<{}>, snapshot?: any) {
-       if(this.props.match.params.userId != prevProps.match.params.userId)
+       if(this.props.match.params.userId !== prevProps.match.params.userId)
         this.refreshProfile()
     }
 
@@ -77,9 +54,10 @@ class ProfileContainer extends React.Component<ProfileContainerPropsType> {
     render() {
         return (
             <div>
-                <Profile{...this.props}
+                <Profile //{...this.props}
                         isOwner={!this.props.match.params.userId}
-                        profile={this.props.profile} status={this.props.status}
+                        profile={this.props.profile}
+                        status={this.props.status}
                         updateUserStatus={this.props.updateUserStatus}
                         savePhoto={this.props.savePhoto}
                 />

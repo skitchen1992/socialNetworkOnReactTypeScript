@@ -3,9 +3,9 @@ import './Profile.css';
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
 import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
-import {ProfileType} from "./ProfileContainer";
 
 import React from "react";
+import {ProfileType} from "../../redux/profile-reducer";
 
 type ProfileTypeProps = {
     profile: ProfileType | null

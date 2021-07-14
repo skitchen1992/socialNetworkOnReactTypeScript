@@ -13,9 +13,13 @@ type FormDataType = {
     password: string
     rememberMe: boolean
 
+
+
 }
 type MapStateToPropsType = {
-    isAuth: boolean
+    isAuth: boolean,
+    captchaUrl:string | null
+
 }
 type MapDispatchToPropsType = {
     login: (email: string, password: string, rememberMe: boolean) => void
@@ -31,10 +35,12 @@ const Login = (props: UsersPropsType) => {
         return <Redirect to={"/profile"}/>
     }
     return (
-        <LoginReduxForm onSubmit={onSubmit}/>
+        <LoginReduxForm onSubmit={onSubmit} />
     );
 };
-
+type bla = {
+    captchaUrl: string | null
+}
 
 export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
     return (
@@ -62,7 +68,8 @@ const LoginReduxForm = reduxForm<FormDataType>({
 })(LoginForm)
 
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
-    isAuth: state.auth.isAuth
+    isAuth: state.auth.isAuth,
+    captchaUrl:state.auth.captchaUrl
 
 })
 

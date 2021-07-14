@@ -1,9 +1,34 @@
 import {v1} from "uuid";
 import {profileAPI, usersAPI} from "../api/api";
 import {Dispatch} from "redux";
-import {ProfileType} from "../components/Profile/ProfileContainer";
 
 export const addPostActionCreator = (newPostText: string) => ({type: "ADD-POST", newPostText}) as const
+type PhotoType = {
+    "small": string | null,
+    "large": string | null
+}
+
+export type Contacts =
+    "facebook" |
+    "website" |
+    "vk" |
+    "twitter" |
+    "instagram" |
+    "youtube" |
+    "github" |
+    "mainLink"
+
+export type ProfileType = {
+    "aboutMe"?: string,
+    "contacts": {
+        [key in Contacts]: string | null
+    },
+    "lookingForAJob": true,
+    "lookingForAJobDescription": string | null,
+    "fullName": string | null,
+    "userId": number | null,
+    "photos": PhotoType
+}
 export const setUserProfile = (profile: ProfileType | null) => ({type: "SET-USER-PROFILE", profile}) as const
 export const setUserStatus = (status: string) => ({type: "SET-USER-STATUS", status}) as const
 export const savePhotoSuccess = (photos: SavePhotoSuccess) => ({type: "SAVE-PHOTO-SUCCESS", photos}) as const

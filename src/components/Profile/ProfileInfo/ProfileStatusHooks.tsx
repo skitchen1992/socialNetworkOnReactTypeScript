@@ -24,12 +24,16 @@ export const ProfileStatusHooks = (props: ProfileStatusType) => {
         props.updateUserStatus(status)
     }
     return (
-        <div>
+        <div><span>Status: </span>
             {editMode
                 ? <input onChange={onStatusChange} onBlur={deactivateEditMode}
                          value={status} autoFocus/>
                 : <span onDoubleClick={activateEditMode}>{status || "Нет статуса"}</span>}
         </div>
     )
+}
+
+const Contact = (props:any)=>{
+    return
 }
 
