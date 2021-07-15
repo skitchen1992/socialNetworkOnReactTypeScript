@@ -1,18 +1,1 @@
-nav{
-    grid-area: n;
-    background-color: #EDEEF0;
-}
 
-
-li{
-  list-style-type:none ;
-  padding: 0.8rem;
-
-}
-li:hover{
-  background-color: #AEB7C2;
-}
-a{
-  text-decoration: none;
-  color:black;
-}  

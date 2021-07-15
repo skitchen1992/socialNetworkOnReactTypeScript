@@ -1,4 +1,4 @@
-.wrapper{
+/*.wrapper{
   display: grid;
   grid-template-areas:
   "h h h"
@@ -13,4 +13,4 @@
 .content{
   grid-area: c;
   background-color: #EDEEF0;
-}
+}*/
