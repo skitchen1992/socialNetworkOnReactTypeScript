@@ -11,6 +11,9 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
+import PeopleOutlineIcon from '@material-ui/icons/PeopleOutline';
+import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 import {Link, NavLink} from "react-router-dom";
 
@@ -67,15 +70,15 @@ export default function Nav() {
                 <List>
 
                     <ListItem button component={Link} to="/profile">
-                        <ListItemIcon> <InboxIcon/></ListItemIcon>
+                        <ListItemIcon> <AccountCircleIcon/></ListItemIcon>
                         <ListItemText primary={"Profile"}/>
                     </ListItem>
                     <ListItem button component={Link} to="/dialogs">
-                        <ListItemIcon> <InboxIcon/></ListItemIcon>
+                        <ListItemIcon> <ChatBubbleOutlineIcon/></ListItemIcon>
                         <ListItemText primary={"Messages"}/>
                     </ListItem>
                     <ListItem button component={Link} to="/users">
-                        <ListItemIcon> <InboxIcon/></ListItemIcon>
+                        <ListItemIcon> <PeopleOutlineIcon/></ListItemIcon>
                         <ListItemText primary={"Users"}/>
                     </ListItem>
 

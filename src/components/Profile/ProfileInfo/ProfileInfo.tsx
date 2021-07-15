@@ -1,11 +1,15 @@
-import classes from './ProfileInfo.module.css';
+import s from './ProfileInfo.module.css';
 import Preloader from "../../common/Preloader/Preloader";
 import {ProfileStatusHooks} from "./ProfileStatusHooks";
 import userPhoto from "../../../assets/images/2.png";
-import React, {ChangeEvent, useState, WeakValidationMap} from "react";
-import {createField, Input} from "../../common/FormsControls/FormsControls";
-import {Contacts, ProfileType} from "../../../redux/profile-reducer";
-import {reduxForm} from "redux-form";
+import React, {ChangeEvent,} from "react";
+import { ProfileType} from "../../../redux/profile-reducer";
+
+import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import PhotoCamera from '@material-ui/icons/PhotoCamera';
+
 
 type ProfileInfoType = {
     profile: ProfileType | null
@@ -15,7 +19,21 @@ type ProfileInfoType = {
     savePhoto: (file: File) => void
 }
 
+const useStyles = makeStyles((theme: Theme) =>
+    createStyles({
+        root: {
+            '& > *': {
+                margin: theme.spacing(1),
+            },
+        },
+        input: {
+            display: 'none',
+        },
+    }),
+);
+
 function ProfileInfo(props: ProfileInfoType) {
+
     if (!props.profile) {
         return <Preloader/>
     }
@@ -26,11 +44,11 @@ function ProfileInfo(props: ProfileInfoType) {
     }
     return !props.profile ? null : (
         <div>
-            <div className={classes.img1}></div>
-            <div className={classes.userInfo}>
-                <div className={classes.logo}>
-                    <img className={classes.img} src={props.profile.photos.large || userPhoto}></img>
-                    {props.isOwner && <input onChange={mainPhotoSelected} type={"file"}/>}
+            <div className={s.img1}></div>
+            <div className={s.userInfo}>
+                <div className={s.logo}>
+                    <img className={s.img} src={props.profile.photos.large || userPhoto}></img>
+                    {props.isOwner &&  <UploadButtons mainPhotoSelected={mainPhotoSelected}/>}
                 </div>
                 <ProfileData profile={props.profile} status={props.status}
                              updateUserStatus={props.updateUserStatus}
@@ -39,9 +57,41 @@ function ProfileInfo(props: ProfileInfoType) {
                 />
 
             </div>
+
         </div>
     )
 }
+type UploadButtons={
+    mainPhotoSelected:(e:any)=>void
+}
+
+export const UploadButtons = (props:UploadButtons)=>{
+    const classes = useStyles();
+    return(
+        <>
+            <input
+                accept="image/!*"
+                className={classes.input}
+                id="contained-button-file"
+                multiple
+                type="file"
+                onChange={(e)=>props.mainPhotoSelected(e)}
+            />
+            <label htmlFor="contained-button-file">
+                <Button variant="contained" color="primary" component="span">
+                    Upload
+                </Button>
+            </label>
+            <input  className={classes.input} id="icon-button-file" type={"file"} onChange={(e)=>props.mainPhotoSelected(e)}  />
+            <label htmlFor="icon-button-file">
+                <IconButton color="primary" aria-label="upload picture" component="span">
+                    <PhotoCamera />
+                </IconButton>
+            </label>
+        </>
+    )
+}
+
 
 type ProfileDataType = {
     profile: any
@@ -51,8 +101,8 @@ type ProfileDataType = {
 }
 const ProfileData = (props: ProfileDataType) => {
     return (
-        <div className={classes.about}>
-            <div className={classes.name}><span>Name: </span>{props.profile.fullName}</div>
+        <div className={s.about}>
+            <div className={s.name}><span>Name: </span>{props.profile.fullName}</div>
             <ProfileStatusHooks status={props.status} updateUserStatus={props.updateUserStatus}/>
             <div>
                 <span>Contact: </span>{Object.keys(props.profile.contacts).map((key: string) => {
@@ -76,10 +126,5 @@ const Contact = (props: ContactType) => {
 }
 
 export default ProfileInfo;
-{/*                    <p>Date of Birth:<span>2 january</span></p>
-                    <p>City:<span>Moscow</span></p>
-                    <p>Education:<span>BSU 11</span></p>
-                    <p>WEB
-                        Site:<span>{props.profile.contacts.website != null ? props.profile.contacts.website : " Сайта нет"}</span>
-                    </p>*/
-}
+
+

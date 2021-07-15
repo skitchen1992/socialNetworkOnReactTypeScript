@@ -31,7 +31,7 @@ const DialogsContainer = React.lazy(() => import("./components/Dialogs/DialogsCo
 const ProfileContainer = React.lazy(() => import("./components/Profile/ProfileContainer"));
 
 
-export const NewApp = () => {
+export const App = () => {
 
     const dispatch = useDispatch()
     const initialized = useSelector((state: AppStateType) => state.app.initialized)
@@ -39,19 +39,6 @@ export const NewApp = () => {
         dispatch(initializeApp())
     },[])
 
-    const useStyles = makeStyles((theme: Theme) =>
-        createStyles({
-            root: {
-                flexGrow: 1,
-            },
-            paper: {
-                padding: theme.spacing(2),
-                textAlign: 'center',
-                color: theme.palette.text.secondary,
-            },
-        }),
-    );
-    const classes = useStyles();
     return !initialized ? <Preloader/> : (
 
         <Container fixed>
@@ -81,64 +68,3 @@ export const NewApp = () => {
     )
 }
 
-/*        <div className={classes.wrapper}>
-            <HeaderContainer/>
-            <Nav/>
-            <div className={classes.content}>
-                <Route path="/dialogs" render={WithSuspense(DialogsContainer)}/>
-                <Route path="/profile/:userId?" render={WithSuspense(ProfileContainer)}/>
-                <Route path="/users" render={() => <UsersContainer/>}/>
-                <Route path="/login" render={() => <LoginPage/>}/>
-            </div>
-        </div>*/
-
-/*class App extends Component<AppPropsType> {
-    componentDidMount() {
-        this.props.initializeApp()
-    }
-    render() {
-        if (!this.props.initialized) {
-            return <Preloader/>
-        }
-
-        return (
-
-            <div className={classes.wrapper}>
-                <HeaderContainer/>
-                <Nav/>
-                <div className={classes.content}>
-                    <Route path="/dialogs" render={WithSuspense(DialogsContainer)}/>
-                    <Route path="/profile/:userId?" render={WithSuspense(ProfileContainer)}/>
-                    <Route path="/users" render={() => <UsersContainer/>}/>
-                    <Route path="/login" render={() => <LoginPage/>}/>
-                </div>
-            </div>
-        )
-    }
-}
-
-
-const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
-    initialized: state.app.initialized
-})
-
-export default compose<React.ComponentType>(
-    withRouter,
-    connect(mapStateToProps, {initializeApp})
-)(App)*/
-
-/*
-<div className={classes.root}>
-    <Grid container spacing={3}>
-    <Grid item xs={12}>
-
-    </Grid>
-<Grid item xs={12} sm={6}>
-
-</Grid>
-<Grid item xs={12} sm={6}>
-
-</Grid>
-
-</Grid>
-</div>*/
