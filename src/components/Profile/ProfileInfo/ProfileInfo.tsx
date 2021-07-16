@@ -6,9 +6,10 @@ import React, {ChangeEvent,} from "react";
 import { ProfileType} from "../../../redux/profile-reducer";
 
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
+import {Avatar} from "@material-ui/core";
+
 
 
 type ProfileInfoType = {
@@ -29,11 +30,15 @@ const useStyles = makeStyles((theme: Theme) =>
         input: {
             display: 'none',
         },
+        large: {
+            width: theme.spacing(7),
+            height: theme.spacing(7),
+        },
     }),
 );
 
 function ProfileInfo(props: ProfileInfoType) {
-
+    const classes = useStyles();
     if (!props.profile) {
         return <Preloader/>
     }
@@ -47,7 +52,7 @@ function ProfileInfo(props: ProfileInfoType) {
             <div className={s.img1}></div>
             <div className={s.userInfo}>
                 <div className={s.logo}>
-                    <img className={s.img} src={props.profile.photos.large || userPhoto}></img>
+                    <Avatar className={classes.large}  alt="Remy Sharp" src={props.profile.photos.large || userPhoto} />
                     {props.isOwner &&  <UploadButtons mainPhotoSelected={mainPhotoSelected}/>}
                 </div>
                 <ProfileData profile={props.profile} status={props.status}
@@ -69,7 +74,7 @@ export const UploadButtons = (props:UploadButtons)=>{
     const classes = useStyles();
     return(
         <>
-            <input
+{/*            <input
                 accept="image/!*"
                 className={classes.input}
                 id="contained-button-file"
@@ -81,7 +86,7 @@ export const UploadButtons = (props:UploadButtons)=>{
                 <Button variant="contained" color="primary" component="span">
                     Upload
                 </Button>
-            </label>
+            </label>*/}
             <input  className={classes.input} id="icon-button-file" type={"file"} onChange={(e)=>props.mainPhotoSelected(e)}  />
             <label htmlFor="icon-button-file">
                 <IconButton color="primary" aria-label="upload picture" component="span">
@@ -104,9 +109,9 @@ const ProfileData = (props: ProfileDataType) => {
         <div className={s.about}>
             <div className={s.name}><span>Name: </span>{props.profile.fullName}</div>
             <ProfileStatusHooks status={props.status} updateUserStatus={props.updateUserStatus}/>
-            <div>
+            <div >
                 <span>Contact: </span>{Object.keys(props.profile.contacts).map((key: string) => {
-                return <Contact contactTitle={key} contactValue={props.profile.contacts[key] as any}/>
+                return <Contact  contactTitle={key} contactValue={props.profile.contacts[key] as any}/>
             })}
             </div>
         </div>
@@ -119,7 +124,7 @@ type ContactType = {
 }
 const Contact = (props: ContactType) => {
     return (
-        <div>
+        <div className={s.wrapContact}>
             <span>{props.contactTitle}</span>:<span>{props.contactValue}</span>
         </div>
     )

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-
+import CreateIcon from '@material-ui/icons/Create';
 
 type ProfileStatusType = {
     status: string
@@ -28,12 +28,10 @@ export const ProfileStatusHooks = (props: ProfileStatusType) => {
             {editMode
                 ? <input onChange={onStatusChange} onBlur={deactivateEditMode}
                          value={status} autoFocus/>
-                : <span onDoubleClick={activateEditMode}>{status || "Нет статуса"}</span>}
+                : <span onDoubleClick={activateEditMode}><CreateIcon fontSize="small"/>{status || "Нет статуса"}</span>}
+
         </div>
     )
 }
 
-const Contact = (props:any)=>{
-    return
-}
 

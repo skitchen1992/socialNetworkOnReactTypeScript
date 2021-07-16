@@ -7,12 +7,14 @@
 
 .userInfo {
     display: flex;
-    margin: 2rem 0 0 0;
+
+    margin: 2rem;
 }
 
 .img {
     width: 5rem;
-    padding-left: 1rem;
+    margin-bottom: 1rem;
+
 
 }
 
@@ -24,4 +26,8 @@
 .logo{
     display: flex;
     flex-direction: column;
+    align-items: center;
+}
+.wrapContact{
+    margin-left: 0.5rem;
 }

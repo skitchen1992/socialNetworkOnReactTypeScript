@@ -54,7 +54,6 @@ export type CommonProfileReducerType = AddPostActionType | SetUserProfile | SetU
 export type PostsType = {
     id: string
     message: string
-    likesCount: number
 }
 
 export const getUserProfile = (userId: number) => async (dispatch: Dispatch) => { //санка
@@ -86,9 +85,7 @@ export type ProfileStateType = {
 }
 let initialState: ProfileStateType = {
     posts: [
-        {id: v1(), message: "Hi", likesCount: 13},
-        {id: v1(), message: "My first post", likesCount: 12},
-        {id: v1(), message: "Yes", likesCount: 14},
+        {id: v1(), message: "My first post"},
     ] as Array<PostsType>,
     profile: null,
     status: ''
@@ -100,7 +97,7 @@ const profileReducer = (state = initialState, action: CommonProfileReducerType):
         case "ADD-POST":
             return {
                 ...state,
-                posts: [...state.posts, {id: v1(), message: action.newPostText, likesCount: 13}]
+                posts: [{id: v1(), message: action.newPostText},...state.posts]
             };
         case "SET-USER-PROFILE":
             return {...state, profile: action.profile}

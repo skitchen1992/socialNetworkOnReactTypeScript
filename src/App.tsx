@@ -41,27 +41,27 @@ export const App = () => {
 
     return !initialized ? <Preloader/> : (
 
-        <Container fixed>
-
+        <Container fixed >
             <Grid container spacing={3} >
                 <Grid item xs={12}>
                     <Paper elevation={3} >
                         <HeaderContainer/>
                     </Paper  >
                 </Grid>
-                <Grid item xs={3} sm={3}>
+                <Grid item xs={2} sm={3}>
                     <Paper elevation={3} >
                         <Nav/>
                     </Paper  >
                 </Grid>
-                <Grid item xs={9} sm={9}>
-                    <Route path="/dialogs" render={WithSuspense(DialogsContainer)}/>
-                    <Route path="/profile/:userId?" render={WithSuspense(ProfileContainer)}/>
-                    <Route path="/users" render={() => <UsersContainer/>}/>
-                    <Route path="/login" render={() => <LoginPage/>}/>
+                <Grid item xs={10} sm={9}>
+                    <Paper elevation={3} >
+                        <Route path="/dialogs" render={WithSuspense(DialogsContainer)}/>
+                        <Route path="/profile/:userId?" render={WithSuspense(ProfileContainer)}/>
+                        <Route path="/users" render={() => <UsersContainer/>}/>
+                        <Route path="/login" render={() => <LoginPage/>}/>
+                    </Paper  >
                 </Grid>
             </Grid >
-
         </Container>
 
 

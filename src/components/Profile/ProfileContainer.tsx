@@ -7,6 +7,8 @@ import {RouteComponentProps, withRouter} from "react-router";
 import {AppStateType} from "../../redux/redux-store";
 import withAuthRedirect from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
+import {Paper} from "@material-ui/core";
+import s from "./ProfileContainer.module.css"
 
 type mapStateToPropsType = {
     profile: ProfileType | null
@@ -55,7 +57,7 @@ class ProfileContainer extends React.Component<ProfileContainerPropsType> {
 
     render() {
         return (
-            <div>
+            <div className={s.wrapper}>
                 <Profile
                     isOwner={!this.props.match.params.userId}
                     profile={this.props.profile}
