@@ -4,14 +4,17 @@
     margin: 0 auto;
 
 }
-.loaderPoz{
+
+.loaderPoz {
     display: flex;
     flex-direction: column;
     position: relative;
+    min-height: calc(100vh - 88px);
 
 
 }
-.users{
+
+.users {
     position: absolute;
-    top:5rem
+    top: 5rem
 }

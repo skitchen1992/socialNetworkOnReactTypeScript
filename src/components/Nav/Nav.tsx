@@ -10,8 +10,8 @@ import ListItemText from '@material-ui/core/ListItemText';
 import PeopleOutlineIcon from '@material-ui/icons/PeopleOutline';
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import {Link, NavLink} from "react-router-dom";
-const drawerWidth = '19vw';
+import {Link} from "react-router-dom";
+const drawerWidth = '20em';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({

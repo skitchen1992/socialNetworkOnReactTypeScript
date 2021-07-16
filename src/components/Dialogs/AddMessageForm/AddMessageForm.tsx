@@ -11,15 +11,14 @@ export type FormDataType = {
 const maxLength50 = maxLengthCreator(50)
 export const AddMessageForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
     return (
-        <>
+        <div className={classes.wrap} >
             <form onSubmit={props.handleSubmit}>
                 <Field component={Textarea} validate={[required, maxLength50]} name="newMessageBody"
-                       placeholder="Ввидите сообщение"/>
-                <div>
+                       placeholder="Message..."/>
                     <button className={classes.button}>Send</button>
-                </div>
+
             </form>
-        </>
+        </div>
     )
 }
 export const AddMessageFormRedux = reduxForm<FormDataType>({form: "dialogAddMessageForm"})(AddMessageForm)

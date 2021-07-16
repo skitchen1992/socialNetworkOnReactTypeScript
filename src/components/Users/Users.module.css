@@ -1,9 +1,10 @@
 
 .container {
     display: flex;
-    height: 6rem;
+
     justify-content: flex-start;
     padding: 2rem 2rem;
+
 
 
 }
@@ -11,9 +12,10 @@
 .wrapper {
     display: inline-block;
     width: 20rem;
+    height: 7rem;
     border-radius: 10px;
     padding: 1rem 1rem;
-
+    margin-left: 1rem;
     border: 1px solid grey;
 }
 
@@ -22,7 +24,7 @@
     flex-direction: column;
     justify-content: flex-end;
     align-items: center;
-    width: 5rem;
+    width: 6rem;
 }
 
 .top {

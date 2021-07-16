@@ -1,8 +1,9 @@
 import React from 'react';
 import userPhoto from "../../assets/images/2.png";
-import classes from "../Users/Users.module.css";
+import s from "../Users/Users.module.css";
 import {FollowingInProgress, UsersType} from "../../redux/users-reducer";
 import {NavLink} from 'react-router-dom';
+import {Button} from "@material-ui/core";
 
 
 
@@ -16,30 +17,30 @@ type UserTypes = {
 const User = (props: UserTypes) => {
     return (
         <>
-                <div className={classes.container}>
-                    <div className={classes.wrap}>
+                <div className={s.container}>
+                    <div className={s.wrap}>
                         <div>
                             <NavLink to={`/profile/${props.user.id}`}>
-                                <img className={classes.avatar}
+                                <img className={s.avatar}
                                      src={props.user.photos.small != null ? props.user.photos.small : userPhoto} alt=""/>
                             </NavLink>
                         </div>
-                        <button className={classes.button} disabled={props.followingInProgress
+                        <Button size={"small"} variant="outlined" color="primary"  disabled={props.followingInProgress
                             .some(id => id === props.user.id)} onClick={() => {
                             props.followUnfollowFlow(props.user.id, props.user.followed)
                         }}>
                             {props.user.followed ? 'Unfollow' : 'Follow'}
-                        </button>
+                        </Button>
                     </div>
 
-                    <div className={classes.wrapper}>
-                        <div className={classes.top}>
-                            <div className={classes.name}>{props.user.name}</div>
-                            <div className={classes.country}>{"u.location.country"}</div>
+                    <div className={s.wrapper}>
+                        <div className={s.top}>
+                            <div className={s.name}>{props.user.name}</div>
+                            <div className={s.country}>{props.user.id}</div>
                         </div>
-                        <div className={classes.footer}>
-                            <div className={classes.status}>{props.user.status}</div>
-                            <div className={classes.city}>{"u.location.city"}</div>
+                        <div className={s.footer}>
+                            <div className={s.status}>{props.user.status}</div>
+                            <div className={s.city}>{props.user.uniqueUrlName}</div>
                         </div>
                     </div>
                 </div>

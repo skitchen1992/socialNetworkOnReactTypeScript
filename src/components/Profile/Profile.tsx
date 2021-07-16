@@ -9,14 +9,14 @@ import {ProfileType} from "../../redux/profile-reducer";
 
 type ProfileTypeProps = {
     profile: ProfileType | null
-    status:string
-    updateUserStatus:(status:string)=>void
-    isOwner:boolean
-    savePhoto:(file: File)=>void
+    status: string
+    updateUserStatus: (status: string) => void
+    isOwner: boolean
+    savePhoto: (file: File) => void
 }
 
 
-function Profile(props:ProfileTypeProps) {
+function Profile(props: ProfileTypeProps) {
 
     return (
         <div>

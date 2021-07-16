@@ -13,38 +13,37 @@ type LoginFormValuesType = {
     password: string
     rememberMe: boolean
 
-    captcha:string
+    captcha: string
 }
 type MapStateToPropsType = {
     isAuth: boolean,
-    captchaUrl:string | null
+    captchaUrl: string | null
 
 }
 type MapDispatchToPropsType = {
-    login: (email: string, password: string, rememberMe: boolean, captcha:string) => void
+    login: (email: string, password: string, rememberMe: boolean, captcha: string) => void
 }
 export type UsersPropsType = MapStateToPropsType & MapDispatchToPropsType
-
 
 
 const Login = (props: UsersPropsType) => {
     const onSubmit = (formData: LoginFormValuesType) => {
         console.log(formData.captcha)
-        props.login(formData.email, formData.password, formData.rememberMe,formData.captcha)
+        props.login(formData.email, formData.password, formData.rememberMe, formData.captcha)
     }
     if (props.isAuth) {
         return <Redirect to={"/profile"}/>
     }
     return (
-        <LoginReduxForm onSubmit={onSubmit} captchaUrl={props.captchaUrl} />
+        <LoginReduxForm onSubmit={onSubmit} captchaUrl={props.captchaUrl}/>
     );
 };
 
 type LoginFormOwnProps = {
-    captchaUrl:string | null
+    captchaUrl: string | null
 }
 
-export const LoginForm: React.FC<InjectedFormProps<LoginFormValuesType,LoginFormOwnProps> & LoginFormOwnProps> = (props) => {
+export const LoginForm: React.FC<InjectedFormProps<LoginFormValuesType, LoginFormOwnProps> & LoginFormOwnProps> = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div className={s.wrapper}>
@@ -60,18 +59,22 @@ export const LoginForm: React.FC<InjectedFormProps<LoginFormValuesType,LoginForm
                     </div>
                     {props.error && <div className={s.error}>{props.error}</div>}
                     <button className={s.button}>Login</button>
-                    {props.captchaUrl && <img src={props.captchaUrl } />}
-                    {props.captchaUrl && createField("Symbols from image","captcha",[required],Input,{})}
+                    {props.captchaUrl && <img src={props.captchaUrl}/>}
+                    {props.captchaUrl && createField("Symbols from image", "captcha", [required], Input, {})}
+                    <div className={s.info}>Для входа воспользуйтесь тестовым аккаунтом</div>
+                    <div>Email: skitchen1992@gmail.com</div>
+                    <div>Password: 2n4i4k1i</div>
                 </div>
             </div>
+
         </form>
     )
 }
-const LoginReduxForm = reduxForm<LoginFormValuesType,LoginFormOwnProps>({form: 'login'})(LoginForm)
+const LoginReduxForm = reduxForm<LoginFormValuesType, LoginFormOwnProps>({form: 'login'})(LoginForm)
 
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
     isAuth: state.auth.isAuth,
-    captchaUrl:state.auth.captchaUrl
+    captchaUrl: state.auth.captchaUrl
 
 })
 

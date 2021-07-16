@@ -1,21 +1,17 @@
-import React, {Component, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import './App.module.css';
 import Nav from "./components/Nav/Nav";
-import './App.module.css';
-import {Route, withRouter} from "react-router";
-import classes from "./App.module.css";
+import {Route} from "react-router";
 import UsersContainer from "./components/Users/UsersContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import LoginPage from "./components/Login/Login";
-import {connect, useDispatch, useSelector} from "react-redux";
-import {compose} from "redux";
+import {useDispatch, useSelector} from "react-redux";
 import {initializeApp} from "./redux/app-reducer";
 import {AppStateType} from "./redux/redux-store";
 import Preloader from "./components/common/Preloader/Preloader";
 import WithSuspense from "./hoc/WithSuspense";
-import {Container, createStyles, Grid, makeStyles, Paper, Theme, withStyles} from "@material-ui/core";
-import {inspect} from "util";
-
+import {Container, Grid, Paper,} from "@material-ui/core";
+import classes from "./components/Users/UsersContainer.module.css";
 
 
 type MapDispatchToPropsType = {
@@ -35,36 +31,43 @@ export const App = () => {
 
     const dispatch = useDispatch()
     const initialized = useSelector((state: AppStateType) => state.app.initialized)
-    useEffect(()=>{
+    useEffect(() => {
         dispatch(initializeApp())
-    },[])
+    }, [])
 
-    return !initialized ? <Preloader/> : (
+    return !initialized
+        ? <div className={classes.loaderPoz}>
+            <div className={classes.loader}>
+                <Preloader/>
+            </div>
 
-        <Container fixed >
-            <Grid container spacing={3} >
-                <Grid item xs={12}>
-                    <Paper elevation={3} >
-                        <HeaderContainer/>
-                    </Paper  >
+        </div>
+
+        : (
+            <Container fixed>
+                <Grid container spacing={3}>
+                    <Grid item xs={12}>
+                        <Paper elevation={3}>
+                            <HeaderContainer/>
+                        </Paper>
+                    </Grid>
+                    <Grid item xs={2} sm={3}>
+                        <Paper elevation={3}>
+                            <Nav/>
+                        </Paper>
+                    </Grid>
+                    <Grid item xs={10} sm={9}>
+                        <Paper elevation={3}>
+                            <Route path="/dialogs" render={WithSuspense(DialogsContainer)}/>
+                            <Route path="/profile/:userId?" render={WithSuspense(ProfileContainer)}/>
+                            <Route path="/users" render={() => <UsersContainer/>}/>
+                            <Route path="/login" render={() => <LoginPage/>}/>
+                        </Paper>
+                    </Grid>
                 </Grid>
-                <Grid item xs={2} sm={3}>
-                    <Paper elevation={3} >
-                        <Nav/>
-                    </Paper  >
-                </Grid>
-                <Grid item xs={10} sm={9}>
-                    <Paper elevation={3} >
-                        <Route path="/dialogs" render={WithSuspense(DialogsContainer)}/>
-                        <Route path="/profile/:userId?" render={WithSuspense(ProfileContainer)}/>
-                        <Route path="/users" render={() => <UsersContainer/>}/>
-                        <Route path="/login" render={() => <LoginPage/>}/>
-                    </Paper  >
-                </Grid>
-            </Grid >
-        </Container>
+            </Container>
 
 
-    )
+        )
 }
 
