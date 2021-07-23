@@ -35,11 +35,11 @@ const User = (props: UserTypes) => {
 
                     <div className={s.wrapper}>
                         <div className={s.top}>
-                            <div className={s.name}>{props.user.name}</div>
-                            <div className={s.country}>{props.user.id}</div>
+                            <div className={s.name}>Name:{props.user.name}</div>
+                            <div className={s.country}>ID:{props.user.id}</div>
                         </div>
                         <div className={s.footer}>
-                            <div className={s.status}>{props.user.status}</div>
+                            <div className={s.status}>Status:{props.user.status?props.user.status:"not specified"}</div>
                             <div className={s.city}>{props.user.uniqueUrlName}</div>
                         </div>
                     </div>
