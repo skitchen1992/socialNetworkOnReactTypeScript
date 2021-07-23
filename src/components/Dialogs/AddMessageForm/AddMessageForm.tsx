@@ -15,9 +15,12 @@ export const AddMessageForm: React.FC<InjectedFormProps<FormDataType>> = (props)
             <form onSubmit={props.handleSubmit}>
                 <Field component={Textarea} validate={[required, maxLength50]} name="newMessageBody"
                        placeholder="Message..."/>
+                <div className={classes.wrapButton}>
                     <button className={classes.button}>Send</button>
+                </div>
 
             </form>
+
         </div>
     )
 }

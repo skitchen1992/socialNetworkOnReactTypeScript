@@ -40,7 +40,6 @@ export const App = () => {
             <div className={classes.loader}>
                 <Preloader/>
             </div>
-
         </div>
 
         : (
@@ -59,7 +58,7 @@ export const App = () => {
                     <Grid item xs={10} sm={9}>
                         <Paper elevation={3}>
                             <Route path="/dialogs" render={WithSuspense(DialogsContainer)}/>
-                            <Route path="/profile/:userId?" render={WithSuspense(ProfileContainer)}/>
+                            <Route path={["/profile/:userId?" , "*"]} render={WithSuspense(ProfileContainer)}/>
                             <Route path="/users" render={() => <UsersContainer/>}/>
                             <Route path="/login" render={() => <LoginPage/>}/>
                         </Paper>

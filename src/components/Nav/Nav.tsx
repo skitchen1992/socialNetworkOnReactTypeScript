@@ -11,7 +11,11 @@ import PeopleOutlineIcon from '@material-ui/icons/PeopleOutline';
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import {Link} from "react-router-dom";
-const drawerWidth = '20em';
+import s from "../Profile/ProfileInfo/ProfileInfo.module.css";
+import {Avatar} from "@material-ui/core";
+import userPhoto from "../../assets/images/2.png";
+import {UploadButtons} from "../Profile/ProfileInfo/ProfileInfo";
+const drawerWidth = '16%';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -48,7 +52,9 @@ export default function Nav() {
     const classes = useStyles();
     return (
         <div className={classes.root}>
+
             <CssBaseline/>
+
             <Drawer
                 className={classes.drawer}
                 variant="permanent"

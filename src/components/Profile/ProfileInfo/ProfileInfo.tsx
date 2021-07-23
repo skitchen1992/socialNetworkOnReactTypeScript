@@ -19,7 +19,7 @@ type ProfileInfoType = {
     savePhoto: (file: File) => void
 }
 
-const useStyles = makeStyles((theme: Theme) =>
+export const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         root: {
             '& > *': {
@@ -48,7 +48,6 @@ function ProfileInfo(props: ProfileInfoType) {
     }
     return !props.profile ? null : (
         <div>
-            <div className={s.img1}></div>
             <div className={s.userInfo}>
                 <div className={s.logo}>
                     <Avatar className={classes.large} alt="Remy Sharp" src={props.profile.photos.large || userPhoto}/>
