@@ -58,7 +58,7 @@ export const App = () => {
                     <Grid item xs={10} sm={9}>
                         <Paper elevation={3}>
                             <Route path="/dialogs" render={WithSuspense(DialogsContainer)}/>
-                            <Route exact path={["/profile/:userId?","/"]} render={WithSuspense(ProfileContainer)}/>
+                            <Route exact path={["/profile/:userId?","/","/profile"]} render={WithSuspense(ProfileContainer)}/>
                             <Route path="/users" render={() => <UsersContainer/>}/>
                             <Route path="/login" render={() => <LoginPage/>}/>
                         </Paper>
